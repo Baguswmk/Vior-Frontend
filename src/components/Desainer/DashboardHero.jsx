@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { AiOutlineArrowRight, AiOutlineMoneyCollect } from "react-icons/ai";
 import styles from "../../styles/styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdBorderClear } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProductsDesainer } from "../../redux/actions/product";
@@ -12,9 +12,14 @@ import { getAllOrders } from "../../redux/actions/order";
 const DashboardHero = () => {
   const { orders } = useSelector((state) => state.order);
   const { products } = useSelector((state) => state.products);
-  const { user } = useSelector((state) => state.user);
+  const { user, isAuthenticated } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isAuthenticated === false) {
+      navigate("/login");
+    }
+  });
   useEffect(() => {
     if (user && user._id) {
       dispatch(getAllProductsDesainer(user._id));
@@ -22,7 +27,7 @@ const DashboardHero = () => {
     }
   }, [dispatch, user]);
 
-  const availableBalance = user?.availableBalance.toFixed(2);
+  const availableBalance = user.availableBalance.toFixed(2);
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },

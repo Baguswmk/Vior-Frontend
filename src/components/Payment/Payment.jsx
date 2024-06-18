@@ -72,13 +72,13 @@ const Payment = () => {
       };
 
       const userDetails = {
-        name: user?.name,
-        email: user?.email,
+        name: user.name,
+        email: user.email,
       };
 
       const PPN_RATE = 0.1;
 
-      const items = orderData?.cart.map((item) => {
+      const items = orderData.cart.map((item) => {
         const itemPriceWithPPN = item.price * (1 + PPN_RATE);
         return {
           id: item._id,
@@ -189,7 +189,7 @@ const Payment = () => {
 };
 
 const formatPrice = (price) => {
-  return `Rp. ${price?.toLocaleString("id-ID", { style: "currency", currency: "IDR" }).replace("Rp", "").trim()}`;
+  return `Rp. ${price.toLocaleString("id-ID", { style: "currency", currency: "IDR" }).replace("Rp", "").trim()}`;
 };
 
 const PaymentInfo = ({ createMidtransTransaction }) => {
@@ -208,7 +208,7 @@ const PaymentInfo = ({ createMidtransTransaction }) => {
       <div className="justify-center w-full flex flex-col">
         <h3 className="text-[22px] font-[600] text-center mb-4">Cart Items:</h3>
         <div className="flex gap-5 flex-wrap w-full items-center justify-center mb-5">
-          {orderData?.cart?.map((item, index) => (
+          {orderData.cart.map((item, index) => (
             <div key={index} className="p-4 rounded-md shadow-md w-[300px] cursor-pointer hover:shadow-2xl" onClick={() => handlePreview(item)}>
               {item.images.length > 0 && <img src={item.images[0].url} alt={item.name} className="w-full h-auto mt-2" />}
               <p className="text-[16px] font-[500] mb-2">Item {index + 1}</p>

@@ -51,7 +51,7 @@ const UserOrderDetails = () => {
           user,
           rating,
           comment,
-          productId: selectedItem?._id,
+          productId: selectedItem._id,
           orderId: id,
         },
         config
@@ -84,13 +84,13 @@ const UserOrderDetails = () => {
       };
 
       const userDetails = {
-        name: user?.name,
-        email: user?.email,
+        name: user.name,
+        email: user.email,
       };
 
       const PPN_RATE = 0.1;
 
-      const items = orderData?.cart.map((item) => {
+      const items = orderData.cart.map((item) => {
         const itemPriceWithPPN = item.price * (1 + PPN_RATE);
         return {
           id: item._id,
@@ -197,28 +197,28 @@ const UserOrderDetails = () => {
 
       <div className="w-full flex items-center justify-between pt-6">
         <h5 className="text-[#00000084]">
-          Order ID: <span>#{data?._id?.slice(0, 8)}</span>
+          Order ID: <span>#{data._id.slice(0, 8)}</span>
         </h5>
         <h5 className="text-[#00000084]">
-          Placed on: <span>{data?.createdAt?.slice(0, 10)}</span>
+          Placed on: <span>{data.createdAt.slice(0, 10)}</span>
         </h5>
       </div>
 
       {/* order items */}
       <br />
       {data &&
-        data?.cart &&
-        data?.cart.map((item, index) => {
+        data.cart &&
+        data.cart.map((item, index) => {
           return (
             <div key={index} className="w-full flex items-start mb-5">
-              <img src={`${item.images[0]?.url}`} alt="" className="w-[80x] h-[80px]" />
+              <img src={`${item.images[0].url}`} alt="" className="w-[80x] h-[80px]" />
               <div className="w-full">
                 <h5 className="pl-3 text-[20px]">{item.name}</h5>
                 <h5 className="pl-3 text-[20px] text-[#00000091]">
                   Rp. {item.price} x {item.qty}
                 </h5>
               </div>
-              {data?.status === "Paid" ? (
+              {data.status === "Paid" ? (
                 <div className={`${styles.button} text-[#fff]`} onClick={() => setOpen(true) || setSelectedItem(item)}>
                   Write a review
                 </div>
@@ -237,11 +237,11 @@ const UserOrderDetails = () => {
             <h2 className="text-[30px] font-[500] font-Poppins text-center">Give a Review</h2>
             <br />
             <div className="w-full flex">
-              <img src={`${selectedItem?.images[0]?.url}`} alt="" className="w-[80px] h-[80px]" />
+              <img src={`${selectedItem.images[0].url}`} alt="" className="w-[80px] h-[80px]" />
               <div>
-                <div className="pl-3 text-[20px]">{selectedItem?.name}</div>
+                <div className="pl-3 text-[20px]">{selectedItem.name}</div>
                 <h4 className="pl-3 text-[20px]">
-                  Rp. {selectedItem?.price} x {selectedItem?.qty}
+                  Rp. {selectedItem.price} x {selectedItem.qty}
                 </h4>
               </div>
             </div>
@@ -288,7 +288,7 @@ const UserOrderDetails = () => {
 
       <div className="border-t w-full text-right">
         <h5 className="pt-3 text-[18px]">
-          Total Price: <strong>Rp. {data?.totalPrice}</strong>
+          Total Price: <strong>Rp. {data.totalPrice}</strong>
         </h5>
       </div>
       <br />

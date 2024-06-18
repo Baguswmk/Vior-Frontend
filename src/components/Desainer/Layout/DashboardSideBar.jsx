@@ -5,7 +5,6 @@ import { CiSettings } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { BiMessageSquareDetail } from "react-icons/bi";
 
-
 const DashboardSideBar = ({ active }) => {
   return (
     <div className="w-full h-[90vh] bg-white shadow-sm overflow-y-scroll sticky top-2 left-0 z-10">
@@ -45,15 +44,12 @@ const DashboardSideBar = ({ active }) => {
         </Link>
       </div>
 
-
-
       <div className="w-full flex items-center p-4">
         <Link to="/dashboard-messages" className="w-full flex items-center">
           <BiMessageSquareDetail size={30} color={`${active === 8 ? "crimson" : "#555"}`} />
-          <h5 className={`hidden 800px:block pl-2 text-[18px] font-[400] ${active === 8 ? "text-[crimson]" : "text-[#555]"}`}>Shop Inbox</h5>
+          <h5 className={`hidden 800px:block pl-2 text-[18px] font-[400] ${active === 8 ? "text-[crimson]" : "text-[#555]"}`}>Messages</h5>
         </Link>
       </div>
-
 
       <div className="w-full flex items-center p-4">
         <Link to="/settings" className="w-full flex items-center">
@@ -64,6 +60,5 @@ const DashboardSideBar = ({ active }) => {
     </div>
   );
 };
-
 
 export default DashboardSideBar;

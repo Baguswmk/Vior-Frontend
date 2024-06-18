@@ -94,11 +94,11 @@ const ProductDetails = ({ data }) => {
   };
   let totalReviewsLength = 0;
 
-  products?.reviews?.forEach(() => {
+  products.reviews.forEach(() => {
     totalReviewsLength++;
   });
 
-  const totalRatings = products?.reviews?.reduce((sum, review) => sum + review.rating, 0);
+  const totalRatings = products.reviews.reduce((sum, review) => sum + review.rating, 0);
 
   const averageRating = (totalRatings / totalReviewsLength || 0).toFixed(2);
 
@@ -133,7 +133,7 @@ const ProductDetails = ({ data }) => {
           <div className="w-full py-5">
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
-                <img src={data.images[select]?.url} alt="" className="w-[80%]" />
+                <img src={data.images[select].url} alt="" className="w-[80%]" />
                 <div className="w-full flex">
                   {data.images.map((i, index) => (
                     <div key={index} className={`${select === 0 ? "border" : ""} cursor-pointer`}>
@@ -178,7 +178,7 @@ const ProductDetails = ({ data }) => {
                 )}
                 <div className="flex items-center pt-8 cursor-pointer">
                   <Link to={`/desainer/preview/${data.creator._id}`}>
-                    <img src={data.creator.avatar?.url} alt="" className="w-[50px] h-[50px] rounded-full mr-2" />
+                    <img src={data.creator.avatar.url} alt="" className="w-[50px] h-[50px] rounded-full mr-2" />
                   </Link>
                   <div className="pr-8">
                     <Link to={`/desainer/preview/${data.creator._id}`}>
@@ -266,7 +266,7 @@ const ProductDetailsInfo = ({ data, products, totalReviewsLength, averageRating 
           {data.reviews && data.reviews.length > 0 ? (
             data.reviews.map((item, index) => (
               <div key={index} className="w-full flex my-2">
-                <img src={item.user.avatar?.url} alt="" className="w-[50px] h-[50px] rounded-full" />
+                <img src={item.user.avatar.url} alt="" className="w-[50px] h-[50px] rounded-full" />
                 <div className="pl-2">
                   <div className="w-full flex items-center">
                     <h1 className="font-[500] mr-3">{item.user.name}</h1>
@@ -287,7 +287,7 @@ const ProductDetailsInfo = ({ data, products, totalReviewsLength, averageRating 
           <div className="w-full 800px:w-[50%]">
             <Link to={`/desainer/preview/${data._id}`}>
               <div className="flex items-center">
-                <img src={data.avatar?.url} className="w-[50px] h-[50px] rounded-full" alt="" />
+                <img src={data.avatar.url} className="w-[50px] h-[50px] rounded-full" alt="" />
                 <div className="pl-3">
                   <h3 className={styles.shop_name}>{data.name}</h3>
                   <h5 className="pb-2 text-[15px]">({averageRating}/5) Ratings product</h5>
@@ -302,7 +302,7 @@ const ProductDetailsInfo = ({ data, products, totalReviewsLength, averageRating 
                 Joined on: <span className="font-[500]">{data.createdAt.slice(0, 10)}</span>
               </h5>
               <h5 className="font-[600] pt-3">
-                Total Products: <span className="font-[500]">{products?.length || 0}</span>
+                Total Products: <span className="font-[500]">{products.length || 0}</span>
               </h5>
               <h5 className="font-[600] pt-3">
                 Total Reviews Product: <span className="font-[500]">{totalReviewsLength}</span>

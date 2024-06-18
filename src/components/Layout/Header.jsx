@@ -79,7 +79,7 @@ const Header = ({ activeHeading }) => {
                     return (
                       <Link to={`/product/${i._id}`} key={i._id}>
                         <div className="w-full flex items-start-py-3">
-                          <img src={`${i.images[0]?.url}`} alt="" className="w-[40px] h-[40px] mr-[10px]" />
+                          <img src={`${i.images[0].url}`} alt="" className="w-[40px] h-[40px] mr-[10px]" />
                           <h1>{i.name}</h1>
                         </div>
                       </Link>
@@ -109,7 +109,7 @@ const Header = ({ activeHeading }) => {
               <div className="relative cursor-pointer mr-[15px]">
                 {isAuthenticated ? (
                   <Link to="/profile">
-                    <img src={`${user?.avatar?.url}`} className="w-[35px] h-[35px] rounded-full" alt="" />
+                    <img src={`${user.avatar.url}`} className="w-[35px] h-[35px] rounded-full" alt="" />
                   </Link>
                 ) : (
                   <Link to="/login">
@@ -173,7 +173,7 @@ const Header = ({ activeHeading }) => {
             <div className="relative cursor-pointer mr-[10px]">
               {isAuthenticated ? (
                 <Link to="/profile">
-                  <img src={`${user?.avatar?.url}`} className="w-[35px] h-[35px] rounded-full" alt="" />
+                  <img src={`${user.avatar.url}`} className="w-[35px] h-[35px] rounded-full" alt="" />
                 </Link>
               ) : (
                 <Link to="/login">
@@ -222,7 +222,7 @@ const Header = ({ activeHeading }) => {
             {isAuthenticated ? (
               <div>
                 <Link to="/profile">
-                  <img src={`${user.avatar?.url}`} alt="" className="w-[35px] h-[35px] rounded-full border-[2px] border-[#323334]" />
+                  <img src={`${user.avatar.url}`} alt="" className="w-[35px] h-[35px] rounded-full border-[2px] border-[#323334]" />
                 </Link>
               </div>
             ) : (
@@ -264,7 +264,7 @@ const Header = ({ activeHeading }) => {
                       return (
                         <Link to={`/product/${Product_name}`} key={index}>
                           <div className="flex items-center">
-                            <img src={i.image_Url[0]?.url} alt="" className="w-[50px] mr-2" />
+                            <img src={i.image_Url[0].url} alt="" className="w-[50px] mr-2" />
                             <h5>{i.name}</h5>
                           </div>
                         </Link>
@@ -300,7 +300,5 @@ const Header = ({ activeHeading }) => {
     </>
   );
 };
-
-
 
 export default Header;

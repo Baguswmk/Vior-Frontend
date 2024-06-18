@@ -24,7 +24,7 @@ const ProductsPage = () => {
     if (categoryData === null) {
       setData(allProducts);
     } else {
-      const filteredProducts = allProducts?.filter((product) => product.category === categoryData);
+      const filteredProducts = allProducts.filter((product) => product.category === categoryData);
       setData(filteredProducts);
     }
   }, [allProducts, categoryData]);
@@ -40,11 +40,11 @@ const ProductsPage = () => {
           <br />
           <div className={`${styles.section}`}>
             <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-4 lg:gap-[25px] xl:grid-cols-5 xl:gap-[30px] mb-12">
-              {data?.map((product, index) => (
+              {data.map((product, index) => (
                 <ProductCard data={product} key={index} />
               ))}
             </div>
-            {data?.length === 0 && <h1 className="text-center w-full pb-[100px] text-[20px]">No products Found!</h1>}
+            {data.length === 0 && <h1 className="text-center w-full pb-[100px] text-[20px]">No products Found!</h1>}
           </div>
           <Footer />
         </div>

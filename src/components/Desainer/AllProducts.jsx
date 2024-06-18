@@ -84,7 +84,7 @@ const AllProducts = () => {
         name: item.name,
         price: formatPrice(item.price),
         Stock: item.stock,
-        sold: item?.sold_out,
+        sold: item.sold_out,
       });
     });
   }

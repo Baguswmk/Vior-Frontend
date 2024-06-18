@@ -66,7 +66,7 @@ const AdminDashboardMain = () => {
         itemsQty: item.cart.reduce((acc, item) => acc + item.qty, 0),
         total: formatPrice(item.totalPrice),
         status: item.status,
-        createdAt: item?.createdAt.slice(0, 10),
+        createdAt: item.createdAt.slice(0, 10),
       });
     });
 

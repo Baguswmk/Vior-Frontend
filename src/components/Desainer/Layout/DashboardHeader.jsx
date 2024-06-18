@@ -1,11 +1,19 @@
-
 import { FiPackage, FiShoppingBag } from "react-icons/fi";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import logo from "../../../Assests/images/logo/fullLogo.svg";
+import { useEffect } from "react";
 const DashboardHeader = () => {
-  const { user } = useSelector((state) => state.user);
+  const { user, isAuthenticated } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated === false) {
+      navigate("/login");
+    }
+  });
+
   return (
     <div className="w-full h-[80px] bg-white shadow sticky top-0 left-0 z-30 flex items-center justify-between px-4">
       <div className="max-w-36">
@@ -15,7 +23,6 @@ const DashboardHeader = () => {
       </div>
       <div className="flex items-center">
         <div className="flex items-center mr-4">
-         
           <Link to="/dashboard-products" className="800px:block hidden">
             <FiShoppingBag color="#555" size={30} className="mx-5 cursor-pointer" />
           </Link>
@@ -26,11 +33,7 @@ const DashboardHeader = () => {
             <BiMessageSquareDetail color="#555" size={30} className="mx-5 cursor-pointer" />
           </Link>
           <Link to={`/profile`}>
-            <img
-              src={`${user.avatar?.url}`}
-              alt=""
-              className="w-[50px] h-[50px] rounded-full object-cover"
-            />
+            <img src={`${user.avatar.url}`} alt="" className="w-[50px] h-[50px] rounded-full object-cover" />
           </Link>
         </div>
       </div>

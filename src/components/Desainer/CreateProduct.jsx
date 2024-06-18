@@ -96,6 +96,7 @@ const CreateProduct = () => {
                 className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Enter your product name..."
+                required
               />
             </div>
             <br />
@@ -133,7 +134,9 @@ const CreateProduct = () => {
 
             <br />
             <div>
-              <label className="pb-2">Price</label>
+              <label className="pb-2">
+                Price <span className="text-red-500">*</span>
+              </label>
               <input
                 type="number"
                 name="price"
@@ -141,6 +144,7 @@ const CreateProduct = () => {
                 className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 onChange={(e) => setPrice(e.target.value)}
                 placeholder="Enter your product price..."
+                required
               />
             </div>
 
@@ -163,7 +167,8 @@ const CreateProduct = () => {
               <label className="pb-2">
                 Upload Images <span className="text-red-500">*</span>
               </label>
-              <input type="file" name="" id="uploadImages" className="hidden" multiple onChange={handleImageChange} />
+
+              <input type="file" name="" id="uploadImages" className="hidden" multiple onChange={handleImageChange} required />
               <div className="w-full flex items-center flex-wrap">
                 <label htmlFor="uploadImages">
                   <AiOutlinePlusCircle size={30} className="mt-3" color="#555" />
@@ -180,9 +185,7 @@ const CreateProduct = () => {
               </div>
             </div>
             <div>
-              <label className="pb-2">
-                Upload 3D Models <span className="text-red-500">*</span>
-              </label>
+              <label className="pb-2">Upload 3D Models</label>
               <input type="file" name="" id="uploadModels" className="hidden" multiple accept=".glb,.gltf" onChange={handleModelChange} />
               <div className="w-full flex items-center flex-wrap">
                 <label htmlFor="uploadModels">

@@ -65,10 +65,10 @@ const OrderDetails = () => {
 
       <div className="w-full flex items-center justify-between pt-6">
         <h5 className="text-[#00000084]">
-          Order ID: <span>#{data?._id?.slice(0, 8)}</span>
+          Order ID: <span>#{data._id.slice(0, 8)}</span>
         </h5>
         <h5 className="text-[#00000084]">
-          Placed on: <span>{data?.createdAt?.slice(0, 10)}</span>
+          Placed on: <span>{data.createdAt.slice(0, 10)}</span>
         </h5>
       </div>
 
@@ -76,9 +76,9 @@ const OrderDetails = () => {
       <br />
       <br />
       {data &&
-        data?.cart.map((item, index) => (
+        data.cart.map((item, index) => (
           <div key={index} className="w-full flex items-start mb-5">
-            <img src={`${item.images[0]?.url}`} alt="" className="w-[80x] h-[80px]" />
+            <img src={`${item.images[0].url}`} alt="" className="w-[80x] h-[80px]" />
             <div className="w-full">
               <h5 className="pl-3 text-[20px]">{item.name}</h5>
               <h5 className="pl-3 text-[20px] text-[#00000091]">
@@ -90,7 +90,7 @@ const OrderDetails = () => {
 
       <div className="border-t w-full text-right">
         <h5 className="pt-3 text-[18px]">
-          Total Price: <strong>Rp. {data?.totalPrice}</strong>
+          Total Price: <strong>Rp. {data.totalPrice}</strong>
         </h5>
       </div>
       <br />
@@ -98,10 +98,10 @@ const OrderDetails = () => {
 
       <br />
       <h4 className="pt-3 text-[20px] font-[600]">Order Status:</h4>
-      {data?.status !== "Processing refund" && data?.status !== "Refund Success" && (
+      {data.status !== "Processing refund" && data.status !== "Refund Success" && (
         <select value={status} onChange={(e) => setStatus(e.target.value)} className="w-[200px] mt-2 border h-[35px] rounded-[5px]">
           {["Processing", "Transferred to delivery partner", "Shipping", "Received", "On the way", "Delivered"]
-            .slice(["Processing", "Transferred to delivery partner", "Shipping", "Received", "On the way", "Delivered"].indexOf(data?.status))
+            .slice(["Processing", "Transferred to delivery partner", "Shipping", "Received", "On the way", "Delivered"].indexOf(data.status))
             .map((option, index) => (
               <option value={option} key={index}>
                 {option}
@@ -109,9 +109,9 @@ const OrderDetails = () => {
             ))}
         </select>
       )}
-      {data?.status === "Processing refund" || data?.status === "Refund Success" ? (
+      {data.status === "Processing refund" || data.status === "Refund Success" ? (
         <select value={status} onChange={(e) => setStatus(e.target.value)} className="w-[200px] mt-2 border h-[35px] rounded-[5px]">
-          {["Processing refund", "Refund Success"].slice(["Processing refund", "Refund Success"].indexOf(data?.status)).map((option, index) => (
+          {["Processing refund", "Refund Success"].slice(["Processing refund", "Refund Success"].indexOf(data.status)).map((option, index) => (
             <option value={option} key={index}>
               {option}
             </option>
@@ -119,7 +119,7 @@ const OrderDetails = () => {
         </select>
       ) : null}
 
-      <div className={`${styles.button} mt-5 !bg-[#FCE1E6] !rounded-[4px]  font-[600] !h-[45px] text-[18px]`} onClick={data?.status !== "Processing refund" ? orderUpdateHandler : refundOrderUpdateHandler}>
+      <div className={`${styles.button} mt-5 !bg-[#FCE1E6] !rounded-[4px]  font-[600] !h-[45px] text-[18px]`} onClick={data.status !== "Processing refund" ? orderUpdateHandler : refundOrderUpdateHandler}>
         Update Status
       </div>
       {/* text-[#E94560] */}

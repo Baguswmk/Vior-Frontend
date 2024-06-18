@@ -40,7 +40,7 @@ const UserInbox = () => {
   }, []);
 
   useEffect(() => {
-    arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && setMessages((prev) => [...prev, arrivalMessage]);
+    arrivalMessage && currentChat.members.includes(arrivalMessage.sender) && setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage, currentChat]);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const UserInbox = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const response = await axios.get(`${server}/conversation/get-all-conversation-user/${user?._id}`, config);
+        const response = await axios.get(`${server}/conversation/get-all-conversation-user/${user._id}`, config);
         setConversations(response.data.conversations);
       } catch (error) {
         console.log(error);
@@ -65,7 +65,7 @@ const UserInbox = () => {
 
   useEffect(() => {
     if (user) {
-      const userId = user?._id;
+      const userId = user._id;
       socket.emit("addUser", userId);
       socket.on("getUsers", (data) => {
         setOnlineUsers(data);
@@ -74,7 +74,7 @@ const UserInbox = () => {
   }, [user]);
 
   const onlineCheck = (chat) => {
-    const chatMembers = chat.members.find((member) => member !== user?._id);
+    const chatMembers = chat.members.find((member) => member !== user._id);
     const online = onlineUsers.find((user) => user.userId === chatMembers);
     return online ? true : false;
   };
@@ -82,7 +82,7 @@ const UserInbox = () => {
   useEffect(() => {
     const getMessage = async () => {
       try {
-        const response = await axios.get(`${server}/message/get-all-messages/${currentChat?._id}`);
+        const response = await axios.get(`${server}/message/get-all-messages/${currentChat._id}`);
         setMessages(response.data.messages);
       } catch (error) {
         console.log(error);
@@ -99,10 +99,10 @@ const UserInbox = () => {
       text: newMessage,
       conversationId: currentChat._id,
     };
-    const receiverId = currentChat.members.find((member) => member !== user?._id);
+    const receiverId = currentChat.members.find((member) => member !== user._id);
 
     socket.emit("sendMessage", {
-      senderId: user?._id,
+      senderId: user._id,
       receiverId,
       text: newMessage,
     });
@@ -188,7 +188,7 @@ const UserInbox = () => {
   };
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    scrollRef.current.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   return (
@@ -204,7 +204,7 @@ const UserInbox = () => {
               index={index}
               setOpen={setOpen}
               setCurrentChat={setCurrentChat}
-              me={user?._id}
+              me={user._id}
               setUserData={setUserData}
               userData={userData}
               online={onlineCheck(item)}
@@ -263,13 +263,13 @@ const MessageList = ({ data, index, setOpen, setCurrentChat, me, setUserData, us
       }}
     >
       <div className="relative">
-        <img src={user?.avatar?.url} alt="" className="w-[50px] h-[50px] rounded-full" />
+        <img src={user.avatar.url} alt="" className="w-[50px] h-[50px] rounded-full" />
         <div className={`w-[12px] h-[12px] ${online ? "bg-green-400" : "bg-[#c7b9b9]"} rounded-full absolute top-[2px] right-[2px]`} />
       </div>
       <div className="pl-3">
-        <h1 className="text-[18px]">{user?.name}</h1>
+        <h1 className="text-[18px]">{user.name}</h1>
         <p className="text-[16px] text-[#000c]">
-          {!loading && data?.lastMessageId !== userData?._id ? "You:" : userData?.name.split(" ")[0] + ": "} {data?.lastMessage}
+          {!loading && data.lastMessageId !== userData._id ? "You:" : userData.name.split(" ")[0] + ": "} {data.lastMessage}
         </p>
       </div>
     </div>
@@ -281,9 +281,9 @@ const DesainerInbox = ({ setOpen, newMessage, setNewMessage, sendMessageHandler,
     <div className="w-full min-h-full flex flex-col justify-between p-5">
       <div className="w-full flex p-3 items-center justify-between bg-slate-200">
         <div className="flex">
-          <img src={userData?.avatar?.url} alt="" className="w-[60px] h-[60px] rounded-full" />
+          <img src={userData.avatar.url} alt="" className="w-[60px] h-[60px] rounded-full" />
           <div className="pl-3">
-            <h1 className="text-[18px] font-[600]">{userData?.name}</h1>
+            <h1 className="text-[18px] font-[600]">{userData.name}</h1>
             <h1>{activeStatus ? "Active Now" : ""}</h1>
           </div>
         </div>
@@ -295,7 +295,7 @@ const DesainerInbox = ({ setOpen, newMessage, setNewMessage, sendMessageHandler,
           const createdAtDate = new Date(item.createdAt);
           return (
             <div key={index} className={`flex w-full my-2 ${item.sender === sellerId ? "justify-end" : "justify-start"}`} ref={scrollRef}>
-              {item.sender !== sellerId && <img src={userData?.avatar?.url} className="w-[40px] h-[40px] rounded-full mr-3" alt="" />}
+              {item.sender !== sellerId && <img src={userData.avatar.url} className="w-[40px] h-[40px] rounded-full mr-3" alt="" />}
               {item.images && <img src={item.images.url} className="w-[300px] h-[300px] object-cover rounded-[10px] ml-2 mb-2" />}
               {item.text && (
                 <div>

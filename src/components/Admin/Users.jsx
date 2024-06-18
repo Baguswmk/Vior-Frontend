@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 
 const Users = () => {
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.user);
+  const { users, success, error } = useSelector((state) => state.user);
   const [openDelete, setOpenDelete] = useState(false);
   const [openForm, setOpenForm] = useState(false);
   const [userId, setUserId] = useState(null);
@@ -24,19 +24,30 @@ const Users = () => {
     dispatch(getAllUsers());
   }, [dispatch]);
 
-  const handleDelete = async (id) => {
-    dispatch(deleteUser(id));
+  useEffect(() => {
+    if (success) {
+      toast.success(success);
+    }
+    if (error) {
+      toast.error(error);
+    }
+  }, [success, error]);
+
+  const handleDelete = (id) => {
+    if (userId) {
+      dispatch(deleteUser(id));
+    }
     setOpenDelete(false);
-    toast.success("User deleted successfully");
   };
 
   const handleFormSubmit = (data) => {
     if (userId) {
       dispatch(updateUser(userId, data));
-      toast.success("User updated successfully");
+      if (success) {
+        window.location.reload();
+      }
     } else {
       dispatch(createUser(data));
-      toast.success("User created successfully");
     }
     setOpenForm(false);
   };

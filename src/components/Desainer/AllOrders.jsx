@@ -13,7 +13,7 @@ const AllOrders = ({ role }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const userId = user?._id;
+    const userId = user._id;
     if (userId || role === "admin") {
       dispatch(getAllOrdersDesainer(userId, role));
     }
@@ -21,7 +21,6 @@ const AllOrders = ({ role }) => {
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
-    { field: "name", headerName: "Name", minWidth: 180, flex: 1.4 },
     {
       field: "status",
       headerName: "Status",
@@ -64,17 +63,12 @@ const AllOrders = ({ role }) => {
     },
   ];
 
-  const rows = orders.map(
-    (item) => (
-      {
-        id: item._id,
-        name: item.user?.name,
-        itemsQty: item.cart.length,
-        total: "Rp. " + item.totalPrice,
-        status: item.status,
-      }
-    )
-  );
+  const rows = orders.map((item) => ({
+    id: item._id,
+    itemsQty: item.cart.length,
+    total: "Rp. " + item.totalPrice,
+    status: item.status,
+  }));
 
   return (
     <>

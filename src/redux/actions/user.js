@@ -31,28 +31,6 @@ export const logoutUser = () => async (dispatch) => {
   }
 };
 
-// create user
-export const createUser = (userData) => async (dispatch) => {
-  try {
-    dispatch({ type: "CreateUserRequest" });
-
-    const token = localStorage.getItem("token");
-    if (!token) throw new Error("No token found");
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    const { data } = await axios.post(`${server}/user/create-user`, userData, config);
-
-    dispatch({ type: "CreateUserSuccess", payload: data });
-  } catch (error) {
-    dispatch({ type: "CreateUserFail", payload: error.response.data.message });
-  }
-};
-
 // register user
 export const registerUser = (name, email, password, avatar, role) => async (dispatch) => {
   try {
@@ -87,8 +65,6 @@ export const loadUser = () => async (dispatch) => {
     dispatch({ type: "LoadUserFail", payload: error.message || error.response.data.message });
   }
 };
-
-
 
 // user update information
 export const updateUserInformation = (name, email, phoneNumber, password) => async (dispatch) => {
@@ -229,6 +205,28 @@ export const getAllUsers = () => async (dispatch) => {
     dispatch({ type: "getAllUsersSuccess", payload: data.users });
   } catch (error) {
     dispatch({ type: "getAllUsersFailed", payload: error.response.data.message });
+  }
+};
+
+// create user --- admin
+export const createUser = (userData) => async (dispatch) => {
+  try {
+    dispatch({ type: "CreateUserRequest" });
+
+    const token = localStorage.getItem("token");
+    if (!token) throw new Error("No token found");
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.post(`${server}/user/create-user`, userData, config);
+
+    dispatch({ type: "CreateUserSuccess", payload: data });
+  } catch (error) {
+    dispatch({ type: "CreateUserFail", payload: error.response.data.message });
   }
 };
 

@@ -62,7 +62,7 @@ const CartSingle = ({ data, removeFromWishlistHandler, addToCartHandler }) => {
     <div className="border-b p-4">
       <div className="w-full 800px:flex items-center">
         <RxCross1 className="cursor-pointer 800px:mb-['unset'] 800px:ml-['unset'] mb-2 ml-2" onClick={() => removeFromWishlistHandler(data)} />
-        <img src={`${data?.images[0]?.url}`} alt="" className="w-[130px] h-min ml-2 mr-2 rounded-[5px]" />
+        <img src={`${data.images[0].url}`} alt="" className="w-[130px] h-min ml-2 mr-2 rounded-[5px]" />
 
         <div className="pl-[5px]">
           <h1>{data.name}</h1>

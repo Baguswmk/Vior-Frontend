@@ -11,6 +11,7 @@ const initialState = {
 
 export const userReducer = createReducer(initialState, (builder) => {
   builder
+    //user
     .addCase("LogoutRequest", (state) => {
       state.loading = true;
     })
@@ -42,17 +43,6 @@ export const userReducer = createReducer(initialState, (builder) => {
       state.success = action.payload;
     })
     .addCase("RegisterFail", (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    })
-    .addCase("CreateUserRequest", (state) => {
-      state.loading = true;
-    })
-    .addCase("CreateUserSuccess", (state, action) => {
-      state.loading = false;
-      state.success = action.payload;
-    })
-    .addCase("CreateUserFailed", (state, action) => {
       state.loading = false;
       state.error = action.payload;
     })
@@ -104,38 +94,62 @@ export const userReducer = createReducer(initialState, (builder) => {
       state.error = action.payload;
     })
     .addCase("UpdateUserAddressRequest", (state) => {
-      state.addressLoading = true;
+      state.loading = true;
     })
     .addCase("UpdateUserAddressSuccess", (state, action) => {
-      state.addressLoading = false;
+      state.loading = false;
       state.successMessage = action.payload.successMessage;
       state.user = action.payload.user;
     })
     .addCase("UpdateUserAddressFailed", (state, action) => {
-      state.addressLoading = false;
+      state.loading = false;
       state.error = action.payload;
     })
     .addCase("DeleteUserAddressRequest", (state) => {
-      state.addressLoading = true;
+      state.loading = true;
     })
     .addCase("DeleteUserAddressSuccess", (state, action) => {
-      state.addressLoading = false;
+      state.loading = false;
       state.successMessage = action.payload.successMessage;
       state.user = action.payload.user;
     })
     .addCase("DeleteUserAddressFailed", (state, action) => {
-      state.addressLoading = false;
+      state.loading = false;
       state.error = action.payload;
     })
+
+    //admin
     .addCase("getAllUsersRequest", (state) => {
-      state.usersLoading = true;
+      state.loading = true;
     })
     .addCase("getAllUsersSuccess", (state, action) => {
-      state.usersLoading = false;
+      state.loading = false;
       state.users = action.payload;
     })
     .addCase("getAllUsersFailed", (state, action) => {
-      state.usersLoading = false;
+      state.loading = false;
+      state.error = action.payload;
+    })
+    .addCase("CreateUserRequest", (state) => {
+      state.loading = true;
+    })
+    .addCase("CreateUserSuccess", (state, action) => {
+      state.loading = false;
+      state.success = action.payload;
+    })
+    .addCase("CreateUserFailed", (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+    .addCase("updateUserRequest", (state) => {
+      state.loading = true;
+    })
+    .addCase("updateUserSuccess", (state, action) => {
+      state.loading = false;
+      state.success = action.payload;
+    })
+    .addCase("updateUserFailed", (state, action) => {
+      state.loading = false;
       state.error = action.payload;
     })
     .addCase("deleteUserRequest", (state) => {
@@ -143,10 +157,11 @@ export const userReducer = createReducer(initialState, (builder) => {
     })
     .addCase("deleteUserSuccess", (state, action) => {
       state.loading = false;
+      state.success = action.payload;
       state.users = state.users.filter((user) => user.id !== action.payload);
     })
     .addCase("deleteUserFailed", (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    })
+    });
 });

@@ -1,17 +1,25 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const ProtectedAdminRoute = ({ children }) => {
-  const navigate = useNavigate();
   const { loading, isAuthenticated, user } = useSelector((state) => state.user);
-  if (loading === false) {
-    if (!isAuthenticated) {
-      navigate("/login");
-    } else if (user.role !== "admin") {
-      navigate("/");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return navigate("/login", { replace: true });
     }
-    return children;
-  }
+    if (loading === false) {
+      if (!isAuthenticated) {
+        return navigate("/login", { replace: true });
+      } else if (user.role !== "admin") {
+        return navigate("/", { replace: true });
+      }
+    }
+  }, [loading, isAuthenticated, user, navigate, children]);
+  return children;
 };
 
 export default ProtectedAdminRoute;

@@ -1,16 +1,36 @@
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { FiPackage, FiShoppingBag } from "react-icons/fi";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../Assests/images/logo/fullLogo.png";
+import { useEffect } from "react";
+import Loading from "../../Layout/Loading";
+
 const AdminHeader = () => {
-  const { user } = useSelector((state) => state.user);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return navigate("/login", { replace: true });
+    }
+
+    if (!isAuthenticated || !user) {
+      return navigate("/login", { replace: true });
+    } else if (user.role !== "admin") {
+      return navigate("/", { replace: true });
+    }
+  }, [isAuthenticated, user, navigate]);
+
+  if (!user) {
+    return <Loading />;
+  }
 
   return (
     <div className="w-full h-[80px] bg-white shadow sticky top-0 left-0 z-30 flex items-center justify-between px-4">
       <div className="max-w-36">
         <Link to="/">
-          <img src={logo} alt="" className="w-full " />
+          <img src={logo} alt="logo" className="w-full " />
         </Link>
       </div>
       <div className="flex items-center ">
@@ -24,9 +44,13 @@ const AdminHeader = () => {
           <Link to="/dashboard-messages" className="800px:block hidden">
             <BiMessageSquareDetail color="#555" size={30} className="mx-5 cursor-pointer" />
           </Link>
-
           <Link to="/profile">
-            <img src={`${user?.avatar?.url}`} alt="" className="w-[50px] h-[50px] rounded-full object-cover " style={{ maxWidth: "50px", maxHeight: "50px" }} />
+            <img
+              src={user.avatar ? `${user.avatar.url}` : "default-avatar-url"} // Provide a default avatar URL
+              alt="user avatar"
+              className="w-[50px] h-[50px] rounded-full object-cover"
+              style={{ maxWidth: "50px", maxHeight: "50px" }}
+            />
           </Link>
         </div>
       </div>
