@@ -92,5 +92,16 @@ export const productReducer = createReducer(initialProductState, (builder) => {
     .addCase("adminDeleteProductFailed", (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
+    })
+    .addCase("adminUpdateProductRequest", (state) => {
+      state.isLoading = true;
+    })
+    .addCase("adminUpdateProductSuccess", (state, action) => {
+      state.isLoading = false;
+      state.message = action.payload;
+    })
+    .addCase("adminUpdateProductFailed", (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
     });
 });

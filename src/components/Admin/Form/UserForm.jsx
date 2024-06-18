@@ -38,7 +38,7 @@ const UserForm = ({ onSubmit, initialData }) => {
       <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="border p-2 rounded" required />
       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="border p-2 rounded" required />
       <div className="ml-1 flex items-center">
-        <span className="inline-block h-8 w-8 rounded-full overflow-hidden">{avatar ? <img src={avatar} alt="avatar" className="h-full w-full object-cover rounded-full" /> : <RxAvatar className="h-8 w-8" />}</span>
+        <span className="inline-block h-8 w-8 rounded-full overflow-hidden">{avatar ? <img loading="lazy" src={avatar} alt="avatar" className="h-full w-full object-cover rounded-full" /> : <RxAvatar className="h-8 w-8" />}</span>
         <label htmlFor="file-input" className="ml-5 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
           <span>Upload a file</span>
           <input type="file" id="file-input" name="avatar" accept=".jpg,.jpeg,.png" onChange={handleAvatarChange} className="sr-only" />
@@ -55,7 +55,5 @@ const UserForm = ({ onSubmit, initialData }) => {
     </form>
   );
 };
-
-
 
 export default UserForm;

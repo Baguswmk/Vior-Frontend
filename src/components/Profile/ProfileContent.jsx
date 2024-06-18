@@ -22,23 +22,13 @@ const formatPrice = (price) => {
 };
 
 const ProfileContent = ({ active }) => {
-  const { user, error, successMessage } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const [name, setName] = useState(user && user.name);
   const [email, setEmail] = useState(user && user.email);
   const [phoneNumber, setPhoneNumber] = useState(user && user.phoneNumber);
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState(null);
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-      dispatch({ type: "clearErrors" });
-    }
-    if (successMessage) {
-      toast.success(successMessage);
-      dispatch({ type: "clearMessages" });
-    }
-  }, [dispatch, error, successMessage]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,7 +62,7 @@ const ProfileContent = ({ active }) => {
         <>
           <div className="flex justify-center w-full">
             <div className="relative">
-              <img src={`${user.avatar.url}`} className="w-[150px] h-[150px] rounded-full object-cover border-[3px] border-[#3ad132]" alt="" />
+              <img loading="lazy" src={`${user.avatar.url}`} className="w-[150px] h-[150px] rounded-full object-cover border-[3px] border-[#3ad132]" alt="" />
               <div className="w-[30px] h-[30px] bg-[#E3E9EE] rounded-full flex items-center justify-center cursor-pointer absolute bottom-[5px] right-[5px]">
                 <input type="file" id="image" className="hidden" onChange={handleImage} />
                 <label htmlFor="image">
@@ -158,7 +148,7 @@ const Modal = ({ open, onClose, imageSrc }) => {
   return (
     <div style={modalStyle} onClick={onClose}>
       <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-        <img src={imageSrc} alt="Item" style={{ maxWidth: "80%", maxHeight: "80%" }} />
+        <img loading="lazy" src={imageSrc} alt="Item" style={{ maxWidth: "80%", maxHeight: "80%" }} />
       </div>
     </div>
   );
@@ -277,7 +267,7 @@ const AllItems = () => {
       minWidth: 200,
       renderCell: (params) => (
         <Button onClick={() => handleImageModalOpen(params.value)}>
-          <img src={params.value} alt="Item" style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
+          <img loading="lazy" src={params.value} alt="Item" style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
         </Button>
       ),
     },

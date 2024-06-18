@@ -14,6 +14,7 @@ const DropDown = ({ categoriesData, setDropDown }) => {
         categoriesData.map((i, index) => (
           <div key={index} className={`${styles.noramlFlex}`} onClick={() => submitHandle(i)}>
             <img
+              loading="lazy"
               src={i.image_Url}
               style={{
                 width: "25px",
@@ -30,6 +31,5 @@ const DropDown = ({ categoriesData, setDropDown }) => {
     </div>
   );
 };
-
 
 export default DropDown;

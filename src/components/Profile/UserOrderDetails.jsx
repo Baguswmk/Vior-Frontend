@@ -211,7 +211,7 @@ const UserOrderDetails = () => {
         data.cart.map((item, index) => {
           return (
             <div key={index} className="w-full flex items-start mb-5">
-              <img src={`${item.images[0].url}`} alt="" className="w-[80x] h-[80px]" />
+              <img loading="lazy" src={`${item.images[0].url}`} alt="" className="w-[80x] h-[80px]" />
               <div className="w-full">
                 <h5 className="pl-3 text-[20px]">{item.name}</h5>
                 <h5 className="pl-3 text-[20px] text-[#00000091]">
@@ -237,7 +237,7 @@ const UserOrderDetails = () => {
             <h2 className="text-[30px] font-[500] font-Poppins text-center">Give a Review</h2>
             <br />
             <div className="w-full flex">
-              <img src={`${selectedItem.images[0].url}`} alt="" className="w-[80px] h-[80px]" />
+              <img loading="lazy" src={`${selectedItem.images[0].url}`} alt="" className="w-[80px] h-[80px]" />
               <div>
                 <div className="pl-3 text-[20px]">{selectedItem.name}</div>
                 <h4 className="pl-3 text-[20px]">

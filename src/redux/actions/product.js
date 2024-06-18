@@ -191,3 +191,31 @@ export const adminDeleteProduct = (id) => async (dispatch) => {
     });
   }
 };
+
+export const adminUpdateProduct = (id, dataProduct) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "adminUpdateProductRequest",
+    });
+    const token = localStorage.getItem("token");
+    if (!token) throw new Error("No token found");
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.put(`${server}/product/admin-update-product/${id}`, dataProduct, config);
+
+    dispatch({
+      type: "adminUpdateProductSuccess",
+      payload: data.products,
+    });
+  } catch (error) {
+    dispatch({
+      type: "adminUpdateProductFailed",
+      payload: error.response.data.message,
+    });
+  }
+}

@@ -8,30 +8,21 @@ import styles from "../../styles/styles";
 import { RxCross1 } from "react-icons/rx";
 import Modal from "../Modal/Modal";
 import UserForm from "./Form/UserForm";
-import { toast } from "react-toastify";
 
 const Users = () => {
   const dispatch = useDispatch();
-  const { users, success, error } = useSelector((state) => state.user);
+  const { users } = useSelector((state) => state.user);
   const [openDelete, setOpenDelete] = useState(false);
   const [openForm, setOpenForm] = useState(false);
   const [userId, setUserId] = useState(null);
   const [initialData, setInitialData] = useState({ name: "", email: "", password: "", avatar: "", role: "pembeli" });
   const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState("");
-
+  const [success, setSuccess] = useState(false);
+  
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch]);
-
-  useEffect(() => {
-    if (success) {
-      toast.success(success);
-    }
-    if (error) {
-      toast.error(error);
-    }
-  }, [success, error]);
 
   const handleDelete = (id) => {
     if (userId) {
@@ -43,6 +34,7 @@ const Users = () => {
   const handleFormSubmit = (data) => {
     if (userId) {
       dispatch(updateUser(userId, data));
+      setSuccess(true);
       if (success) {
         window.location.reload();
       }

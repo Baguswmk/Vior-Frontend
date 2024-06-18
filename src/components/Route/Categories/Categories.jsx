@@ -31,7 +31,7 @@ const Categories = () => {
               return (
                 <div className="w-full h-[100px] flex items-center justify-evenly bg-gray-50 rounded shadow-md cursor-pointer overflow-hidden" key={i.id} onClick={() => handleSubmit(i)}>
                   <h5 className={`text-[18px] leading-[1.3]`}>{i.title}</h5>
-                  <img src={i.image_Url} className="w-[120px] object-cover" alt="" />
+                  <img loading="lazy" src={i.image_Url} className="w-[120px] object-cover" alt="" />
                 </div>
               );
             })}

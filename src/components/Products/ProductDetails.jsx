@@ -20,7 +20,6 @@ const ProductDetails = ({ data }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const { cart } = useSelector((state) => state.cart);
   const { user, isAuthenticated } = useSelector((state) => state.user);
-  const { products } = useSelector((state) => state.products);
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
   const [select, setSelect] = useState(0);
@@ -28,7 +27,6 @@ const ProductDetails = ({ data }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
   useEffect(() => {
     if (data && data._id) {
       const fetchData = async () => {
@@ -94,11 +92,11 @@ const ProductDetails = ({ data }) => {
   };
   let totalReviewsLength = 0;
 
-  products.reviews.forEach(() => {
+  data.reviews?.forEach(() => {
     totalReviewsLength++;
   });
 
-  const totalRatings = products.reviews.reduce((sum, review) => sum + review.rating, 0);
+  const totalRatings = data.reviews?.reduce((sum, review) => sum + review.rating, 0);
 
   const averageRating = (totalRatings / totalReviewsLength || 0).toFixed(2);
 
@@ -133,14 +131,14 @@ const ProductDetails = ({ data }) => {
           <div className="w-full py-5">
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
-                <img src={data.images[select].url} alt="" className="w-[80%]" />
-                <div className="w-full flex">
+                <div className="w-full flex mb-4">
                   {data.images.map((i, index) => (
-                    <div key={index} className={`${select === 0 ? "border" : ""} cursor-pointer`}>
-                      <img src={i.url} alt="" className="h-[200px] overflow-hidden mr-3 mt-3" onClick={() => setSelect(index)} />
+                    <div key={index} className={`${select === 0 ? "border" : ""} cursor-pointer  w-[40%] flex items-center justify-center`}>
+                      <img loading="lazy" src={i.url} alt="" className="h-[250px] overflow-hidden my-3" onClick={() => setSelect(index)} />
                     </div>
                   ))}
                 </div>
+                <img loading="lazy" src={data.images[select].url} alt="" className="w-[80%]" />
               </div>
               <div className="w-full 800px:w-[50%] pt-5">
                 <h1 className={styles.productTitle}>{data.name}</h1>
@@ -166,19 +164,20 @@ const ProductDetails = ({ data }) => {
                     )}
                   </div>
                 </div>
+                {data.models3d && data.models3d.length > 0 && data.models3d[0].url && isAuthenticated && (
+                  <div className={`${styles.button} max-w-52 mt-6 rounded-[4px] h-11 flex items-center`} onClick={openModal}>
+                    <span className="flex items-center">View 3D Model</span>
+                  </div>
+                )}
                 <div className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`} onClick={() => addToCartHandler(data._id)}>
                   <span className="flex items-center">
                     Add to cart <AiOutlineShoppingCart className="ml-1" />
                   </span>
                 </div>
-                {data.models3d && data.models3d.length > 0 && data.models3d[0].url && (
-                  <div className={`${styles.button} mt-6 rounded-[4px] h-11 flex items-center`} onClick={openModal}>
-                    <span className="flex items-center">View 3D Model</span>
-                  </div>
-                )}
+
                 <div className="flex items-center pt-8 cursor-pointer">
                   <Link to={`/desainer/preview/${data.creator._id}`}>
-                    <img src={data.creator.avatar.url} alt="" className="w-[50px] h-[50px] rounded-full mr-2" />
+                    <img loading="lazy" src={data.creator.avatar.url} alt="" className="w-[50px] h-[50px] rounded-full mr-2 border-gray-500 border" />
                   </Link>
                   <div className="pr-8">
                     <Link to={`/desainer/preview/${data.creator._id}`}>
@@ -195,7 +194,7 @@ const ProductDetails = ({ data }) => {
               </div>
             </div>
           </div>
-          <ProductDetailsInfo data={dataDesainer} products={products} totalReviewsLength={totalReviewsLength} averageRating={averageRating} />
+          <ProductDetailsInfo data={dataDesainer} products={data} totalReviewsLength={totalReviewsLength} averageRating={averageRating} />
           <br />
           <br />
         </div>
@@ -238,6 +237,7 @@ const formatPrice = (price) => {
 
 const ProductDetailsInfo = ({ data, products, totalReviewsLength, averageRating }) => {
   const [active, setActive] = useState(1);
+
   return (
     <div className="bg-[#f5f6fb] px-3 800px:px-10 py-2 rounded">
       <div className="w-full flex justify-between border-b pt-10 pb-2">
@@ -266,7 +266,7 @@ const ProductDetailsInfo = ({ data, products, totalReviewsLength, averageRating 
           {data.reviews && data.reviews.length > 0 ? (
             data.reviews.map((item, index) => (
               <div key={index} className="w-full flex my-2">
-                <img src={item.user.avatar.url} alt="" className="w-[50px] h-[50px] rounded-full" />
+                <img loading="lazy" src={item.user.avatar.url} alt="" className="w-[50px] h-[50px] rounded-full border-gray-500 border " />
                 <div className="pl-2">
                   <div className="w-full flex items-center">
                     <h1 className="font-[500] mr-3">{item.user.name}</h1>
@@ -286,8 +286,8 @@ const ProductDetailsInfo = ({ data, products, totalReviewsLength, averageRating 
         <div className="w-full block 800px:flex p-5 items-center">
           <div className="w-full 800px:w-[50%]">
             <Link to={`/desainer/preview/${data._id}`}>
-              <div className="flex items-center">
-                <img src={data.avatar.url} className="w-[50px] h-[50px] rounded-full" alt="" />
+              <div className="flex items-center ">
+                <img loading="lazy" src={data.avatar?.url} className="w-[50px] h-[50px] rounded-full border-gray-500 border " alt="" />
                 <div className="pl-3">
                   <h3 className={styles.shop_name}>{data.name}</h3>
                   <h5 className="pb-2 text-[15px]">({averageRating}/5) Ratings product</h5>
@@ -299,7 +299,7 @@ const ProductDetailsInfo = ({ data, products, totalReviewsLength, averageRating 
           <div className="w-full 800px:w-[50%] mt-5 800px:mt-0 800px:flex flex-col items-end">
             <div className="text-left">
               <h5 className="font-[600]">
-                Joined on: <span className="font-[500]">{data.createdAt.slice(0, 10)}</span>
+                Joined on: <span className="font-[500]">{data.createdAt?.slice(0, 10)}</span>
               </h5>
               <h5 className="font-[600] pt-3">
                 Total Products: <span className="font-[500]">{products.length || 0}</span>

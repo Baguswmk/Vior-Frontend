@@ -210,7 +210,7 @@ const PaymentInfo = ({ createMidtransTransaction }) => {
         <div className="flex gap-5 flex-wrap w-full items-center justify-center mb-5">
           {orderData.cart.map((item, index) => (
             <div key={index} className="p-4 rounded-md shadow-md w-[300px] cursor-pointer hover:shadow-2xl" onClick={() => handlePreview(item)}>
-              {item.images.length > 0 && <img src={item.images[0].url} alt={item.name} className="w-full h-auto mt-2" />}
+              {item.images.length > 0 && <img loading="lazy" src={item.images[0].url} alt={item.name} className="w-full h-auto mt-2" />}
               <p className="text-[16px] font-[500] mb-2">Item {index + 1}</p>
               <p className="text-[14px] font-[400]">Name Product: {item.name}</p>
               <p className="text-[14px] font-[400]">Price: {formatPrice(item.price)}</p>

@@ -13,10 +13,10 @@ const CardOnHover = ({ role, position, visible }) => {
         left: position.x,
         top: position.y,
         opacity: role ? 1 : 0,
-        pointerEvents: "none", 
+        pointerEvents: "none",
         transform: "translate(0, -100%)",
         transition: "opacity 0.3s",
-        zIndex: 1000 
+        zIndex: 1000,
       }}
     >
       <CardContent>
@@ -25,14 +25,12 @@ const CardOnHover = ({ role, position, visible }) => {
           {role === "desainer" && "Desainer"}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {role === "pembeli" && "Seorang pembeli dapat melakukan pembelian produk dan melihat-lihat desain yang tersedia di platform kami. Pembeli tidak memiliki akses untuk membuat desain baru."}
-          {role === "desainer" && "Seorang desainer dapat membuat desain kreatif untuk produk dan juga melihat-lihat desain lainnya yang ada di platform kami. Desainer memiliki kemampuan untuk mengunggah desain mereka sendiri dan berkolaborasi dengan pembeli."}
+          {role === "pembeli" && "A buyer can purchase products and browse available designs on our platform. Buyers do not have access to create new designs."}
+          {role === "desainer" && "A designer can create creative designs for products and also browse other designs available on our platform. Designers have the ability to upload their own designs and collaborate with buyers."}
         </Typography>
       </CardContent>
     </Card>
   );
 };
-
-
 
 export default CardOnHover;

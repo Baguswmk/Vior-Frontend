@@ -47,7 +47,7 @@ const DesainerSettings = () => {
       <div className="flex w-full 800px:w-[80%] flex-col justify-center my-5">
         <div className="w-full flex items-center justify-center">
           <div className="relative">
-            <img src={avatar ? avatar : `${user.avatar.url}`} alt="" className="w-[200px] h-[200px] rounded-full cursor-pointer" />
+            <img loading="lazy" src={avatar ? avatar : `${user.avatar.url}`} alt="" className="w-[200px] h-[200px] rounded-full cursor-pointer" />
             <div className="w-[30px] h-[30px] bg-[#E3E9EE] rounded-full flex items-center justify-center cursor-pointer absolute bottom-[10px] right-[15px]">
               <input type="file" id="image" className="hidden" onChange={handleImage} />
               <label htmlFor="image">

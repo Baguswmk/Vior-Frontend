@@ -263,7 +263,7 @@ const MessageList = ({ data, index, setOpen, setCurrentChat, me, setUserData, us
       }}
     >
       <div className="relative">
-        <img src={user.avatar.url} alt="" className="w-[50px] h-[50px] rounded-full" />
+        <img loading="lazy" src={user.avatar.url} alt="" className="w-[50px] h-[50px] rounded-full" />
         <div className={`w-[12px] h-[12px] ${online ? "bg-green-400" : "bg-[#c7b9b9]"} rounded-full absolute top-[2px] right-[2px]`} />
       </div>
       <div className="pl-3">
@@ -281,7 +281,7 @@ const DesainerInbox = ({ setOpen, newMessage, setNewMessage, sendMessageHandler,
     <div className="w-full min-h-full flex flex-col justify-between p-5">
       <div className="w-full flex p-3 items-center justify-between bg-slate-200">
         <div className="flex">
-          <img src={userData.avatar.url} alt="" className="w-[60px] h-[60px] rounded-full" />
+          <img loading="lazy" src={userData.avatar.url} alt="" className="w-[60px] h-[60px] rounded-full" />
           <div className="pl-3">
             <h1 className="text-[18px] font-[600]">{userData.name}</h1>
             <h1>{activeStatus ? "Active Now" : ""}</h1>
@@ -295,8 +295,8 @@ const DesainerInbox = ({ setOpen, newMessage, setNewMessage, sendMessageHandler,
           const createdAtDate = new Date(item.createdAt);
           return (
             <div key={index} className={`flex w-full my-2 ${item.sender === sellerId ? "justify-end" : "justify-start"}`} ref={scrollRef}>
-              {item.sender !== sellerId && <img src={userData.avatar.url} className="w-[40px] h-[40px] rounded-full mr-3" alt="" />}
-              {item.images && <img src={item.images.url} className="w-[300px] h-[300px] object-cover rounded-[10px] ml-2 mb-2" />}
+              {item.sender !== sellerId && <img loading="lazy" src={userData.avatar.url} className="w-[40px] h-[40px] rounded-full mr-3" alt="" />}
+              {item.images && <img loading="lazy" src={item.images.url} className="w-[300px] h-[300px] object-cover rounded-[10px] ml-2 mb-2" />}
               {item.text && (
                 <div>
                   <div className={`w-max p-2 rounded ${item.sender === sellerId ? "bg-[#000]" : "bg-[#38c776]"} text-[#fff]`}>

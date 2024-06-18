@@ -36,11 +36,11 @@ const RegisterCard = ({ onSelectRole }) => {
   return (
     <div className="w-full flex flex-col mb-4">
       <div className="my-12 md:my-32">
-        <h1 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Pilih Role Anda</h1>
-        <p className="text-center text-sm m-4">Hover pada setiap peran untuk informasi lebih lanjut</p>
+        <h1 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Choose Role</h1>
+        <p className="text-center text-sm m-4">Hover over each role for more information</p>
       </div>
       <div className="flex items-center flex-col space-y-2 justify-center md:space-x-5 md:flex-row">
-        <div className="hover:shadow-2xl transition-all delay-75 ease-in-out">
+        <div className="hover:shadow-2xl transition-all delay-75 ease-in-out mt-2">
           <Card sx={{ width: [280, 345], borderRadius: "8px" }} onMouseEnter={(e) => handleMouseEnter(e, "pembeli")} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
             {!cardSelected && (
               <>
@@ -56,8 +56,8 @@ const RegisterCard = ({ onSelectRole }) => {
                   />
                 </div>
                 <CardContent>
-                  <p className="text-left text-xl mb-2 font-bold text-gray-700">Pembeli</p>
-                  <p className="text-left text-gray-700">Seorang pembeli dapat melakukan pembelian produk</p>
+                  <p className="text-left text-xl mb-2 font-bold text-gray-700">Buyer</p>
+                  <p className="text-left text-gray-700">A Buyer can purchase products, view products, and make payments</p>
                 </CardContent>
               </>
             )}
@@ -69,7 +69,7 @@ const RegisterCard = ({ onSelectRole }) => {
             </button>
           </Card>
         </div>
-        <div className="hover:shadow-2xl transition-all delay-75 ease-in-out">
+        <div className="hover:shadow-2xl transition-all delay-75 ease-in-out ">
           <Card sx={{ width: [280, 345], borderRadius: "8px" }} onMouseEnter={(e) => handleMouseEnter(e, "desainer")} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
             {!cardSelected && (
               <>
@@ -84,9 +84,9 @@ const RegisterCard = ({ onSelectRole }) => {
                     className="text-[80px] md:text-[120px]"
                   />
                 </div>
-                <CardContent>
-                  <p className="text-left text-xl mb-2 font-bold text-gray-700">Desainer</p>
-                  <p className="text-left text-gray-700">Seorang desainer dapat membuat desain kreatif untuk produk</p>
+                <CardContent > 
+                  <p className="text-left text-xl mb-2 font-bold text-gray-700">Designer</p>
+                  <p className="text-left text-gray-700">A designer can create creative designs for products, can edit the products</p>
                 </CardContent>
               </>
             )}
@@ -103,6 +103,5 @@ const RegisterCard = ({ onSelectRole }) => {
     </div>
   );
 };
-
 
 export default RegisterCard;

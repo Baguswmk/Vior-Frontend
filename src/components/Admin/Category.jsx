@@ -4,45 +4,42 @@ import { AiOutlineDelete, AiOutlineEye, AiOutlineEdit } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { adminGetAllProducts, adminDeleteProduct, createProduct, adminUpdateProduct } from "../../redux/actions/product";
 import Modal from "../Modal/Modal";
-import ProductForm from "./Form/ProductForm";
 import styles from "../../styles/styles";
+import CategoryForm from "./Form/CategoryForm";
+import { createCategory, deleteCategory, getAllCategories, updateCategory } from "../../redux/actions/category";
 
-const Products = () => {
+const Category = () => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openForm, setOpenForm] = useState(false);
-  const [productId, setProductId] = useState(null);
+  const [categoryId, setCategoryId] = useState(null);
   const [initialData, setInitialData] = useState({ name: "", price: "", stock: "", sold: "" });
 
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.products);
+  const { category } = useSelector((state) => state.category);
 
   useEffect(() => {
-    dispatch(adminGetAllProducts());
+    dispatch(getAllCategories());
   }, [dispatch]);
 
   const handleDelete = async (id) => {
-    dispatch(adminDeleteProduct(id));
+    dispatch(deleteCategory(id));
     setOpenDelete(false);
   };
 
   const handleFormSubmit = (data) => {
-    if (productId) {
-      dispatch(adminUpdateProduct(productId, data));
+    if (categoryId) {
+      dispatch(updateCategory(categoryId, data));
     } else {
-      dispatch(createProduct(data));
+      dispatch(createCategory(data));
     }
     setOpenForm(false);
   };
 
   const columns = [
     { field: "no", headerName: "No", minWidth: 100, flex: 0.3 },
-    { field: "id", headerName: "Product ID", minWidth: 150, flex: 0.7 },
+    { field: "id", headerName: "Category ID", minWidth: 150, flex: 0.7 },
     { field: "name", headerName: "Name", minWidth: 150, flex: 1.4 },
-    { field: "price", headerName: "Price", minWidth: 100, flex: 0.6 },
-    { field: "stock", headerName: "Stock", type: "number", minWidth: 80, flex: 0.5 },
-    { field: "sold", headerName: "Sold out", type: "number", minWidth: 130, flex: 0.6 },
     {
       field: "actions",
       headerName: "Actions",
@@ -51,10 +48,10 @@ const Products = () => {
       sortable: false,
       renderCell: (params) => (
         <>
-          <Button onClick={() => setProductId(params.id) || setInitialData(getProductById(params.id)) || setOpenForm(true)}>
+          <Button onClick={() => setCategoryId(params.id) || setInitialData(getCategoryById(params.id)) || setOpenForm(true)}>
             <AiOutlineEdit size={20} />
           </Button>
-          <Button onClick={() => setProductId(params.id) || setOpenDelete(true)}>
+          <Button onClick={() => setCategoryId(params.id) || setOpenDelete(true)}>
             <AiOutlineDelete size={20} />
           </Button>
           <Link to={`/product/${params.id}`}>
@@ -67,31 +64,28 @@ const Products = () => {
     },
   ];
 
-  const getProductById = (id) => {
-    return products.find((product) => product._id === id) || { name: "", price: "", stock: "", sold: "" };
+  const getCategoryById = (id) => {
+    return category.find((category) => category._id === id) || { name: "" };
   };
 
-  const rows = products.map((product, index) => ({
+  const rows = category.map((product, index) => ({
     no: index + 1,
     id: product._id,
     name: product.name,
-    price: product.price,
-    stock: product.stock,
-    sold: product.sold,
   }));
 
   return (
     <div className="w-full flex justify-center pt-5">
       <div className="w-[97%]">
         <div className="w-full flex justify-between mb-4">
-          <h3 className="text-[22px] font-Poppins pb-2">All Products</h3>
+          <h3 className="text-[22px] font-Poppins pb-2">All Category</h3>
           <button
             onClick={() => {
               setOpenForm(true);
             }}
             className={`${styles.button} text-[18px]`}
           >
-            Create Product
+            Create Category
           </button>
         </div>
         <div>
@@ -100,15 +94,15 @@ const Products = () => {
         {openDelete && (
           <Modal open={openDelete} onClose={() => setOpenDelete(false)}>
             <div>
-              <h3>Are you sure you want to delete this product?</h3>
-              <Button onClick={() => handleDelete(productId)}>Confirm</Button>
+              <h3>Are you sure you want to delete this category?</h3>
+              <Button onClick={() => handleDelete(categoryId)}>Confirm</Button>
               <Button onClick={() => setOpenDelete(false)}>Cancel</Button>
             </div>
           </Modal>
         )}
         {openForm && (
           <Modal open={openForm} onClose={() => setOpenForm(false)}>
-            <ProductForm onSubmit={handleFormSubmit} initialData={initialData} />
+            <CategoryForm onSubmit={handleFormSubmit} initialData={initialData} />
           </Modal>
         )}
       </div>
@@ -116,4 +110,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Category;

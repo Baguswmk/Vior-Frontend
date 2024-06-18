@@ -3,6 +3,7 @@ import { useGLTF, useFBX } from "@react-three/drei";
 import { useBox } from "@react-three/cannon";
 import PropTypes from "prop-types";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
+import { ColladaLoader } from "three/examples/jsm/loaders/ColladaLoader"; // Import SKPParser
 import Loading from "../../Layout/Loading";
 
 const Viewer = ({ model, ...props }) => {
@@ -28,6 +29,18 @@ const Viewer = ({ model, ...props }) => {
         },
         undefined,
         (error) => console.error("Error loading OBJ:", error)
+      );
+    } else if (url.endsWith(".skp")) {
+      // SKP file loader
+      const skpLoader = new ColladaLoader();
+      skpLoader.load(
+        url,
+        (skp) => {
+          setIsLoading(false);
+          return { scene: skp.scene };
+        },
+        undefined,
+        (error) => console.error("Error loading SKP:", error)
       );
     } else {
       console.warn("Unsupported model format:", url);

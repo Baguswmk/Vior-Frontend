@@ -59,7 +59,7 @@ const Header = ({ activeHeading }) => {
         <div className="hidden 800px:h-[50px]  800px:my-[20px] 800px:flex items-center justify-between">
           <Link to="/" className=" ">
             <div className="flex lg:flex-row items-center space-x-2 cursor-pointer">
-              <img src={logo} alt="Logo" className="h-10 w-10" />
+              <img loading="lazy" src={logo} alt="Logo" className="h-10 w-10" />
               <div className="flex md:hidden lg:flex w-[2px] rounded-xl h-12 mx-2  bg-[#FFDE59]"></div>
               <div className="flex sm:flex-col md:hidden lg:flex lg:flex-col items-center">
                 <span className="font-semibold text-xl hidden md:flex">VIOR</span>
@@ -79,7 +79,7 @@ const Header = ({ activeHeading }) => {
                     return (
                       <Link to={`/product/${i._id}`} key={i._id}>
                         <div className="w-full flex items-start-py-3">
-                          <img src={`${i.images[0].url}`} alt="" className="w-[40px] h-[40px] mr-[10px]" />
+                          <img loading="lazy" src={`${i.images[0].url}`} alt="" className="w-[40px] h-[40px] mr-[10px]" />
                           <h1>{i.name}</h1>
                         </div>
                       </Link>
@@ -109,7 +109,7 @@ const Header = ({ activeHeading }) => {
               <div className="relative cursor-pointer mr-[15px]">
                 {isAuthenticated ? (
                   <Link to="/profile">
-                    <img src={`${user.avatar.url}`} className="w-[35px] h-[35px] rounded-full" alt="" />
+                    <img loading="lazy" src={`${user.avatar.url}`} className="w-[35px] h-[35px] rounded-full" alt="" />
                   </Link>
                 ) : (
                   <Link to="/login">
@@ -143,7 +143,7 @@ const Header = ({ activeHeading }) => {
           <div className={` ${active === true ? "flex items-end" : "hidden"} `}>
             <Link to="/" className=" ">
               <div className="flex lg:flex-row items-center space-x-2 cursor-pointer">
-                <img src={logoM} alt="Logo" className="h-18 w-52" />
+                <img loading="lazy" src={logoM} alt="Logo" className="h-18 w-52" />
               </div>
             </Link>
           </div>
@@ -173,7 +173,7 @@ const Header = ({ activeHeading }) => {
             <div className="relative cursor-pointer mr-[10px]">
               {isAuthenticated ? (
                 <Link to="/profile">
-                  <img src={`${user.avatar.url}`} className="w-[35px] h-[35px] rounded-full" alt="" />
+                  <img loading="lazy" src={`${user.avatar.url}`} className="w-[35px] h-[35px] rounded-full" alt="" />
                 </Link>
               ) : (
                 <Link to="/login">
@@ -204,7 +204,7 @@ const Header = ({ activeHeading }) => {
             <Link to="/">
               <div className="flex lg:flex-row items-center space-x-2 cursor-pointer">
                 {" "}
-                <img src={logoW} alt="Logo" className="h-12 w-40" />
+                <img loading="lazy" src={logoW} alt="Logo" className="h-12 w-40" />
               </div>
             </Link>
           </div>
@@ -222,7 +222,7 @@ const Header = ({ activeHeading }) => {
             {isAuthenticated ? (
               <div>
                 <Link to="/profile">
-                  <img src={`${user.avatar.url}`} alt="" className="w-[35px] h-[35px] rounded-full border-[2px] border-[#323334]" />
+                  <img loading="lazy" src={`${user.avatar.url}`} alt="" className="w-[35px] h-[35px] rounded-full border-[2px] border-[#323334]" />
                 </Link>
               </div>
             ) : (
@@ -264,7 +264,7 @@ const Header = ({ activeHeading }) => {
                       return (
                         <Link to={`/product/${Product_name}`} key={index}>
                           <div className="flex items-center">
-                            <img src={i.image_Url[0].url} alt="" className="w-[50px] mr-2" />
+                            <img loading="lazy" src={i.image_Url[0].url} alt="" className="w-[50px] mr-2" />
                             <h5>{i.name}</h5>
                           </div>
                         </Link>

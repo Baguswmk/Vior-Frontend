@@ -61,7 +61,7 @@ const RegisterForm = ({ role, handleBack }) => {
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Full Name
+                Fullname
               </label>
               <div className="mt-1">
                 <input
@@ -118,7 +118,7 @@ const RegisterForm = ({ role, handleBack }) => {
             <div>
               <label htmlFor="avatar" className="block text-sm font-medium text-gray-700"></label>
               <div className="mt-2 flex items-center">
-                <span className="inline-block h-8 w-8 rounded-full overflow-hidden">{avatar ? <img src={avatar} alt="avatar" className="h-full w-full object-cover rounded-full" /> : <RxAvatar className="h-8 w-8" />}</span>
+                <span className="inline-block h-8 w-8 rounded-full overflow-hidden">{avatar ? <img loading="lazy" src={avatar} alt="avatar" className="h-full w-full object-cover rounded-full" /> : <RxAvatar className="h-8 w-8" />}</span>
                 <label htmlFor="file-input" className="ml-5 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
                   <span>Upload a file</span>
                   <input type="file" name="avatar" id="file-input" accept=".jpg,.jpeg,.png" onChange={handleFileInputChange} className="sr-only" />
