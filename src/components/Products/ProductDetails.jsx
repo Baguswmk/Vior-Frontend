@@ -15,7 +15,6 @@ import BaseScene from "../3DModel/Models/BaseScene";
 import BaseCharacter from "../3DModel/Models/BaseCharacter";
 import { Sky } from "@react-three/drei";
 import Loading from "../Layout/Loading";
-
 const ProductDetails = ({ data }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const { cart } = useSelector((state) => state.cart);
@@ -27,6 +26,7 @@ const ProductDetails = ({ data }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  console.log(data);
   useEffect(() => {
     if (data && data._id) {
       const fetchData = async () => {
@@ -123,7 +123,6 @@ const ProductDetails = ({ data }) => {
   if (!data) {
     return <Loading />;
   }
-
   return (
     <div className="bg-white">
       {data ? (
@@ -132,11 +131,13 @@ const ProductDetails = ({ data }) => {
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
                 <div className="w-full flex mb-4">
-                  {data.images.map((i, index) => (
-                    <div key={index} className={`${select === 0 ? "border" : ""} cursor-pointer  w-[40%] flex items-center justify-center`}>
-                      <img loading="lazy" src={i.url} alt="" className="h-[250px] overflow-hidden my-3" onClick={() => setSelect(index)} />
-                    </div>
-                  ))}
+                  <div className="max-w-[100%] border px-4 flex gap-5 ">
+                    {data.images.map((i, index) => (
+                      <div key={index} className="cursor-pointer">
+                        <img src={i.url} alt="" className="h-[250px] mx-auto overflow-hidden my-3 flex items-center jusitfy-center" onClick={() => setSelect(index)} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
                 <img loading="lazy" src={data.images[select].url} alt="" className="w-[80%]" />
               </div>
@@ -204,7 +205,7 @@ const ProductDetails = ({ data }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50" onClick={closeModal}></div>
           <div className="relative bg-white w-11/12 h-screen rounded-lg overflow-hidden ">
             <BaseScene>
-              <Viewer model={{ url: data.models3d[0].url }} args={[0.5, 1, 0.5]} scale={0.2} position={[2, 1, 0]} />
+              <Viewer model={{ url: data.models3d[0].url }} args={[0.5, 1, 0.5]} scale={1} position={[2, 0.3, 0]} />
               <BaseCharacter controls position={[2, 1, 3]} args={[0.8]} color="yellow" />
               <Sky />
             </BaseScene>

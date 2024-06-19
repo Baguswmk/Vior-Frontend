@@ -27,9 +27,15 @@ export const createCategory = (category) => async (dispatch) => {
 export const getAllCategories = () => async (dispatch) => {
   try {
     dispatch({ type: "GetAllCategoriesRequest" });
+    const token = localStorage.getItem("token");
+    if (!token) throw new Error("No token found");
 
-    const { data } = await axios.get(`${server}/category/get-all-categories`);
-
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const { data } = await axios.get(`${server}/category/get-all-categories`, config);
     dispatch({ type: "GetAllCategoriesSuccess", payload: data.categories });
   } catch (error) {
     dispatch({ type: "GetAllCategoriesFail", payload: error.response.data.message });

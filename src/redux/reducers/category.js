@@ -9,51 +9,51 @@ const initialOrderState = {
 
 export const categoryReducer = createReducer(initialOrderState, (builder) => {
   builder
-    .addCase("getAllCategoryRequest", (state) => {
+    .addCase("GetAllCategoriesRequest", (state) => {
       state.isLoading = true;
     })
-    .addCase("getAllCategorySuccess", (state, action) => {
+    .addCase("GetAllCategoriesSuccess", (state, action) => {
       state.isLoading = false;
       state.category = action.payload;
       state.success = true;
     })
-    .addCase("getAllCategoryFailed", (state, action) => {
+    .addCase("GetAllCategoriesFail", (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     })
-    .addCase("createCategoryRequest", (state) => {
+    .addCase("CreateCategoryRequest", (state) => {
       state.isLoading = true;
     })
-    .addCase("createCategorySuccess", (state, action) => {
+    .addCase("CreateCategorySuccess", (state, action) => {
       state.isLoading = false;
       state.category = action.payload;
       state.success = true;
     })
-    .addCase("createCategoryFailed", (state, action) => {
+    .addCase("CreateCategoryFailed", (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     })
-    .addCase("deleteCategoryRequest", (state) => {
+    .addCase("DeleteCategoryRequest", (state) => {
       state.isLoading = true;
     })
-    .addCase("deleteCategorySuccess", (state, action) => {
+    .addCase("DeleteCategorySuccess", (state, action) => {
       state.isLoading = false;
       state.category = action.payload;
       state.success = true;
     })
-    .addCase("deleteCategoryFailed", (state, action) => {
+    .addCase("DeleteCategoryFailed", (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     })
-    .addCase("updateCategoryRequest", (state) => {
+    .addCase("UpdateCategoryRequest", (state) => {
       state.isLoading = true;
     })
-    .addCase("updateCategorySuccess", (state, action) => {
+    .addCase("UpdateCategorySuccess", (state, action) => {
       state.isLoading = false;
       state.category = action.payload;
       state.success = true;
     })
-    .addCase("updateCategoryFailed", (state, action) => {
+    .addCase("UpdateCategoryFailed", (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });

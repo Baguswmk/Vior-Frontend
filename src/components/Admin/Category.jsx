@@ -67,7 +67,6 @@ const Category = () => {
   const getCategoryById = (id) => {
     return category.find((category) => category._id === id) || { name: "" };
   };
-
   const rows = category.map((product, index) => ({
     no: index + 1,
     id: product._id,

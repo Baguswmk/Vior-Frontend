@@ -11,6 +11,7 @@ const ProductForm = ({ onSubmit, initialData }) => {
   const [category, setCategory] = useState(initialData.category || "Choose a category");
   const [images, setImages] = useState(initialData.images || []);
   const [models, setModels] = useState(initialData.models || []);
+  const [creator, setCreator] = useState(initialData.creator || "");
 
   useEffect(() => {
     setName(initialData.name || "");
@@ -24,7 +25,7 @@ const ProductForm = ({ onSubmit, initialData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ name, price, stock, sold, category, images, models });
+    onSubmit({ name, price, stock, sold, category, images, models, creator });
   };
 
   const handleImageChange = (e) => {

@@ -70,8 +70,9 @@ const Products = () => {
   const getProductById = (id) => {
     return products.find((product) => product._id === id) || { name: "", price: "", stock: "", sold: "" };
   };
+  const productsArray = Array.isArray(products) ? products : [];
 
-  const rows = products.map((product, index) => ({
+  const rows = productsArray.map((product, index) => ({
     no: index + 1,
     id: product._id,
     name: product.name,

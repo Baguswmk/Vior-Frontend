@@ -59,16 +59,16 @@ const AdminDashboardMain = () => {
   const formatPrice = (price) => `Rp. ${price.toLocaleString()}`;
 
   const row = [];
-  orders &&
-    orders.forEach((item) => {
-      row.push({
-        id: item._id,
-        itemsQty: item.cart.reduce((acc, item) => acc + item.qty, 0),
-        total: formatPrice(item.totalPrice),
-        status: item.status,
-        createdAt: item.createdAt.slice(0, 10),
-      });
+  const ordersArray = Array.isArray(orders) ? orders : [];
+  ordersArray.forEach((item) => {
+    row.push({
+      id: item._id,
+      itemsQty: item.cart.reduce((acc, item) => acc + item.qty, 0),
+      total: formatPrice(item.totalPrice),
+      status: item.status,
+      createdAt: item.createdAt.slice(0, 10),
     });
+  });
 
   return (
     <>

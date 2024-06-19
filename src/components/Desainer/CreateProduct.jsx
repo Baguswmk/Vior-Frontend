@@ -23,11 +23,11 @@ const CreateProduct = () => {
   const [stock, setStock] = useState("");
 
   const handleImageChange = (e) => {
-    setImages([...images, ...Array.from(e.target.files)]);
+    setImages([...images, ...e.target.files]);
   };
 
   const handleModelChange = (e) => {
-    setModels([...models, ...Array.from(e.target.files)]);
+    setModels([...models, ...e.target.files]);
   };
 
   const handleImageDelete = (index) => {
@@ -62,7 +62,7 @@ const CreateProduct = () => {
     });
 
     try {
-      await dispatch(createProduct(formData));
+      await dispatch(createProduct(formData)); // Menunggu hasil dari action createProduct
       if (success) {
         toast.success("Product created successfully");
         navigate("/dashboard-products");
@@ -166,7 +166,7 @@ const CreateProduct = () => {
               <label className="pb-2">
                 Upload Images <span className="text-red-500">*</span>
               </label>
-              <input type="file" id="uploadImages" className="hidden" multiple onChange={handleImageChange} accept="image/*" required />
+              <input type="file" id="uploadImages" className="hidden" multiple onChange={handleImageChange} accept="image/*" />
               <div className="w-full flex items-center flex-wrap">
                 <label htmlFor="uploadImages">
                   <AiOutlinePlusCircle size={30} className="mt-3" color="#555" />
@@ -184,7 +184,7 @@ const CreateProduct = () => {
             <br />
             <div>
               <label className="pb-2">Upload 3D Models</label>
-              <input type="file" id="uploadModels" className="hidden" multiple accept=".glb,.gltf" onChange={handleModelChange} />
+              <input type="file" id="uploadModels" className="hidden" multiple accept=".glb,.gltf,.obj,.dae" onChange={handleModelChange} />
               <div className="w-full flex items-center flex-wrap">
                 <label htmlFor="uploadModels">
                   <AiOutlinePlusCircle size={30} className="mt-3" color="#555" />

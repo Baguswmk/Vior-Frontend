@@ -16,7 +16,7 @@ import {
   UserInbox,
   TrackOrderPage,
 } from "./routes/Routes.js";
-import { AdminDashboardPage, AdminDashboardUsers, AdminDashboardOrders, AdminDashboardProducts, AdminDashboardWithdraw } from "./routes/AdminRoutes";
+import { AdminDashboardPage, AdminDashboardUsers, AdminDashboardOrders, AdminDashboardProducts, AdminDashboardWithdraw, AdminDashboardCategory } from "./routes/AdminRoutes";
 import { ToastContainer } from "react-toastify";
 import ProtectedAdminRoute from "./routes/ProtectedAdminRoute.js";
 import ProtectedRoute from "./routes/ProtectedRoute.js";
@@ -142,6 +142,14 @@ const App = () => {
           element={
             <ProtectedAdminRoute>
               <AdminDashboardProducts />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin-category"
+          element={
+            <ProtectedAdminRoute>
+              <AdminDashboardCategory />
             </ProtectedAdminRoute>
           }
         />

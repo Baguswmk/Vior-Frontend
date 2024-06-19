@@ -212,9 +212,8 @@ const AllOrders = () => {
   ];
 
   const row = [];
-
-  orders &&
-    orders.forEach((item) => {
+  const ordersArray = Array.isArray(orders) ? orders : [];
+  ordersArray.forEach(item => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
