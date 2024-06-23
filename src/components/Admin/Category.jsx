@@ -23,15 +23,15 @@ const Category = () => {
   }, [dispatch]);
 
   const handleDelete = async (id) => {
-    dispatch(deleteCategory(id));
+    await dispatch(deleteCategory(id));
     setOpenDelete(false);
   };
 
-  const handleFormSubmit = (data) => {
+  const handleFormSubmit =async (data) => {
     if (categoryId) {
-      dispatch(updateCategory(categoryId, data));
+      await dispatch(updateCategory(categoryId, data));
     } else {
-      dispatch(createCategory(data));
+      await dispatch(createCategory(data));
     }
     setOpenForm(false);
   };

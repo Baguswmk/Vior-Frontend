@@ -23,15 +23,15 @@ const Products = () => {
   }, [dispatch]);
 
   const handleDelete = async (id) => {
-    dispatch(adminDeleteProduct(id));
+    await dispatch(adminDeleteProduct(id));
     setOpenDelete(false);
   };
 
-  const handleFormSubmit = (data) => {
+  const handleFormSubmit = async (data) => {
     if (productId) {
-      dispatch(adminUpdateProduct(productId, data));
+      await dispatch(adminUpdateProduct(productId, data));
     } else {
-      dispatch(createProduct(data));
+      await dispatch(createProduct(data));
     }
     setOpenForm(false);
   };

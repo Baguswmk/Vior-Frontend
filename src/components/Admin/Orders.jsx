@@ -19,7 +19,7 @@ const Orders = () => {
   }, [dispatch]);
 
   const handleDelete = async (id) => {
-    dispatch(deleteOrder(id));
+    await dispatch(deleteOrder(id));
     toast.success("Order deleted successfully");
     setOpenDelete(false);
   };

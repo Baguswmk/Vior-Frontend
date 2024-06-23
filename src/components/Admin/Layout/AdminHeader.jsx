@@ -2,7 +2,7 @@ import { BiMessageSquareDetail } from "react-icons/bi";
 import { FiPackage, FiShoppingBag } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../../Assests/images/logo/fullLogo.png";
+import logo from "../../../Assests/images/logo/fullLogo.webp";
 import { useEffect } from "react";
 import Loading from "../../Layout/Loading";
 

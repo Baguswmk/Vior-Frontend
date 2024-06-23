@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import styles from "../../../styles/styles";
 import bg from "../../../Assests/images/bg.webp";
+
 const Hero = () => {
   return (
     <div
-      className={`relative min-h-[70vh] 800px:min-h-[80vh] w-full bg-no-repeat bg-cover ${styles.noramlFlex}`}
+      className={`relative min-h-[70vh] 800px:min-h-[80vh] w-full bg-no-repeat bg-cover bg-center ${styles.normalFlex}`}
       style={{
         backgroundImage: `url(${bg})`,
       }}

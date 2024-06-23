@@ -1,45 +1,17 @@
-import "./App.css";
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import {
-  HomePage,
-  LoginPage,
-  RegisterPage,
-  ProductsPage,
-  BestSellingPage,
-  ActivationPage,
-  ProfilePage,
-  ProductDetailsPage,
-  CheckoutPage,
-  PaymentPage,
-  OrderDetailsPage,
-  OrderSuccessPage,
-  UserInbox,
-  TrackOrderPage,
-} from "./routes/Routes.js";
-import { AdminDashboardPage, AdminDashboardUsers, AdminDashboardOrders, AdminDashboardProducts, AdminDashboardWithdraw, AdminDashboardCategory } from "./routes/AdminRoutes";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
+import { HomePage, LoginPage, RegisterPage, ProductsPage, BestSellingPage, ActivationPage, ProfilePage, ProductDetailsPage, CheckoutPage, PaymentPage, OrderDetailsPage, OrderSuccessPage, TrackOrderPage } from "./routes/Routes.js";
+import { AdminDashboardPage, AdminDashboardUsers, AdminDashboardOrders, AdminDashboardProducts, AdminDashboardWithdraw, AdminDashboardCategory } from "./routes/AdminRoutes";
 import ProtectedAdminRoute from "./routes/ProtectedAdminRoute.js";
 import ProtectedRoute from "./routes/ProtectedRoute.js";
 import ProtectedDesainerRoute from "./routes/ProtectedDesainerRoute.js";
-import "react-toastify/dist/ReactToastify.css";
-import {
-  DesainerDashboardPage,
-  DesainerCreateProduct,
-  DesainerAllProducts,
-  DesainerPreviewPage,
-  DesainerAllOrders,
-  DesainerOrderDetails,
-  DesainerSettingsPage,
-  DesainerAllWithdraw,
-  // DesainerInboxPage,
-  DesainerHomePage,
-} from "./routes/DesainerRoutes";
-import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react";
+import { DesainerDashboardPage, DesainerCreateProduct, DesainerAllProducts, DesainerPreviewPage, DesainerAllOrders, DesainerOrderDetails, DesainerSettingsPage, DesainerAllWithdraw, DesainerHomePage } from "./routes/DesainerRoutes";
 import { loadUser } from "./redux/actions/user.js";
 import { getAllProducts } from "./redux/actions/product";
 import { useDispatch } from "react-redux";
-import "react-loading-skeleton/dist/skeleton.css";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -48,18 +20,19 @@ const App = () => {
     dispatch(loadUser());
     dispatch(getAllProducts());
   }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<HomePage />} />
-        <Route path="*" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/activation/:activation_token" element={<ActivationPage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/product/:id" element={<ProductDetailsPage />} />
         <Route path="/best-selling" element={<BestSellingPage />} />
+
         <Route
           path="/profile"
           element={
@@ -68,7 +41,6 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/payment"
           element={
@@ -86,14 +58,6 @@ const App = () => {
           }
         />
         <Route path="/order/success" element={<OrderSuccessPage />} />
-        <Route
-          path="/message"
-          element={
-            <ProtectedRoute>
-              <UserInbox />
-            </ProtectedRoute>
-          }
-        />
         <Route
           path="/user/order/:id"
           element={
@@ -120,7 +84,6 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         />
-
         <Route
           path="/admin-users"
           element={
@@ -164,7 +127,6 @@ const App = () => {
 
         {/* Desainer Routes */}
         <Route path="/desainer/preview/:id" element={<DesainerPreviewPage />} />
-
         <Route
           path="/desainer/:id"
           element={
@@ -205,7 +167,6 @@ const App = () => {
             </ProtectedDesainerRoute>
           }
         />
-
         <Route
           path="/order/:id"
           element={
@@ -230,6 +191,9 @@ const App = () => {
             </ProtectedDesainerRoute>
           }
         />
+
+        {/* Default Route */}
+        <Route path="*" element={<HomePage />} />
       </Routes>
       <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
     </BrowserRouter>

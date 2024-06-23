@@ -32,7 +32,7 @@ const ProfileContent = ({ active }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(updateUserInformation(name, email, phoneNumber, password, avatar));
+    await dispatch(updateUserInformation(name, email, phoneNumber, password, avatar));
   };
 
   const handleImage = async (e) => {
@@ -213,14 +213,14 @@ const AllOrders = () => {
 
   const row = [];
   const ordersArray = Array.isArray(orders) ? orders : [];
-  ordersArray.forEach(item => {
-      row.push({
-        id: item._id,
-        itemsQty: item.cart.length,
-        total: formatPrice(item.totalPrice),
-        status: item.status,
-      });
+  ordersArray.forEach((item) => {
+    row.push({
+      id: item._id,
+      itemsQty: item.cart.length,
+      total: formatPrice(item.totalPrice),
+      status: item.status,
     });
+  });
 
   return (
     <div className="pl-8 pt-1">
@@ -437,7 +437,7 @@ const Address = () => {
     if (addressType === "" || country === "" || city === "") {
       toast.error("Please fill all the fields!");
     } else {
-      dispatch(updateUserAddress(country, city, address1, address2, zipCode, addressType));
+      await dispatch(updateUserAddress(country, city, address1, address2, zipCode, addressType));
       setOpen(false);
       setCountry("");
       setCity("");

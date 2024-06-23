@@ -12,5 +12,4 @@ import PaymentPage from "../pages/Client/PaymentPage";
 import OrderSuccessPage from "../pages/Client/OrderSuccessPage";
 import OrderDetailsPage from "../pages/Client/OrderDetailsPage";
 import TrackOrderPage from "../pages/Client/TrackOrderPage";
-import UserInbox from "../pages/Client/UserInbox";
-export { HomePage, LoginPage, RegisterPage, ProductsPage, BestSellingPage, FAQPage, ActivationPage, ProfilePage, ProductDetailsPage, CheckoutPage, PaymentPage, OrderSuccessPage, OrderDetailsPage, TrackOrderPage, UserInbox };
+export { HomePage, LoginPage, RegisterPage, ProductsPage, BestSellingPage, FAQPage, ActivationPage, ProfilePage, ProductDetailsPage, CheckoutPage, PaymentPage, OrderSuccessPage, OrderDetailsPage, TrackOrderPage };

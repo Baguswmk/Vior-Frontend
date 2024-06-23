@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BsFillBagFill } from "react-icons/bs";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../../styles/styles";
 import { getAllOrders, getOrderDetails } from "../../redux/actions/order";
@@ -296,9 +296,9 @@ const UserOrderDetails = () => {
 
       <br />
       <div className="w-full flex items-center justify-center gap-5">
-        <Link to="/">
+        {/* <Link to="/">
           <div className={`${styles.button} `}>Send Message</div>
-        </Link>
+        </Link> */}
         {data.status === "Processing" ? (
           <button className={`${styles.button} !bg-[#f63b60] text-white h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`} onClick={createMidtransTransaction}>
             Pay Now

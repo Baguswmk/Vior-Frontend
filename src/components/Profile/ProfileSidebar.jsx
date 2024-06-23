@@ -1,4 +1,4 @@
-import { AiOutlineLogin, AiOutlineMessage } from "react-icons/ai";
+import { AiOutlineLogin } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { PiImageSquare } from "react-icons/pi";
@@ -6,7 +6,7 @@ import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { TbAddressBook } from "react-icons/tb";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { RxPerson } from "react-icons/rx";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -15,10 +15,9 @@ import Loading from "../Layout/Loading";
 const ProfileSidebar = ({ setActive, active }) => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const logoutHandler = () => {
-    dispatch(logoutUser())
+  const logoutHandler = async () => {
+    await dispatch(logoutUser())
       .then(() => {
         toast.success("Logout successfully!");
         window.location.href = "/";
@@ -44,12 +43,6 @@ const ProfileSidebar = ({ setActive, active }) => {
         <PiImageSquare size={20} color={active === 3 ? "red" : ""} />
         <span className={`pl-3 ${active === 3 ? "text-[red]" : ""} 800px:block hidden`}>My Items</span>
       </div>
-
-      <div className="flex items-center cursor-pointer w-full mb-8" onClick={() => setActive(4) || navigate("/message")}>
-        <AiOutlineMessage size={20} color={active === 4 ? "red" : ""} />
-        <span className={`pl-3 ${active === 4 ? "text-[red]" : ""} 800px:block hidden`}>Inbox</span>
-      </div>
-
       <div className="flex items-center cursor-pointer w-full mb-8" onClick={() => setActive(5)}>
         <RiLockPasswordLine size={20} color={active === 5 ? "red" : ""} />
         <span className={`pl-3 ${active === 5 ? "text-[red]" : ""} 800px:block hidden`}>Change Password</span>

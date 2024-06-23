@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AiFillHeart, AiOutlineHeart, AiOutlineMessage, AiOutlineShoppingCart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart,  AiOutlineShoppingCart } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import styles from "../../../../styles/styles";
@@ -14,9 +14,8 @@ const ProductDetailsCard = ({ setOpen, data }) => {
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
-  //   const [select, setSelect] = useState(false);
 
-  const handleMessageSubmit = () => {};
+  // const handleMessageSubmit = () => {};
 
   const decrementCount = () => {
     if (count > 1) {
@@ -82,11 +81,11 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                     </div>
                   </Link>
                 </div>
-                <div className={`${styles.button}   mt-4 rounded-[4px] h-11`} onClick={handleMessageSubmit}>
+                {/* <div className={`${styles.button}   mt-4 rounded-[4px] h-11`} onClick={handleMessageSubmit}>
                   <span className="  flex items-center">
                     Send Message <AiOutlineMessage className="ml-1" />
                   </span>
-                </div>
+                </div> */}
               </div>
 
               <div className="w-full 800px:w-[50%] pt-5 pl-[5px] pr-[5px]">

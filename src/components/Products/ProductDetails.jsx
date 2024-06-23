@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { AiFillHeart, AiOutlineHeart, AiOutlineMessage, AiOutlineShoppingCart, AiOutlineClose } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart, AiOutlineShoppingCart, AiOutlineClose } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getProductById } from "../../redux/actions/product";
 import { server } from "../../server";
 import styles from "../../styles/styles";
@@ -15,18 +15,19 @@ import BaseScene from "../3DModel/Models/BaseScene";
 import BaseCharacter from "../3DModel/Models/BaseCharacter";
 import { Sky } from "@react-three/drei";
 import Loading from "../Layout/Loading";
+
 const ProductDetails = ({ data }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const { cart } = useSelector((state) => state.cart);
-  const { user, isAuthenticated } = useSelector((state) => state.user);
+  const { isAuthenticated } = useSelector((state) => state.user);
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
   const [select, setSelect] = useState(0);
   const [dataDesainer, setDataDesainer] = useState({});
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  console.log(data);
+
   useEffect(() => {
     if (data && data._id) {
       const fetchData = async () => {
@@ -100,25 +101,25 @@ const ProductDetails = ({ data }) => {
 
   const averageRating = (totalRatings / totalReviewsLength || 0).toFixed(2);
 
-  const handleMessageSubmit = async () => {
-    if (isAuthenticated) {
-      const groupTitle = data._id + user._id;
-      const userId = user._id;
-      const desainerId = data.creator._id;
-      try {
-        const res = await axios.post(`${server}/conversation/create-new-conversation`, {
-          groupTitle,
-          userId,
-          desainerId,
-        });
-        navigate(`/message?${res.data.conversation._id}`);
-      } catch (error) {
-        toast.error(error.response.data.message);
-      }
-    } else {
-      toast.error("Please login to create a conversation");
-    }
-  };
+  // const handleMessageSubmit = async () => {
+  //   if (isAuthenticated) {
+  //     const groupTitle = data._id + user._id;
+  //     const userId = user._id;
+  //     const desainerId = data.creator._id;
+  //     try {
+  //       const res = await axios.post(`${server}/conversation/create-new-conversation`, {
+  //         groupTitle,
+  //         userId,
+  //         desainerId,
+  //       });
+  //       navigate(`/message?${res.data.conversation._id}`);
+  //     } catch (error) {
+  //       toast.error(error.response.data.message);
+  //     }
+  //   } else {
+  //     toast.error("Please login to create a conversation");
+  //   }
+  // };
 
   if (!data) {
     return <Loading />;
@@ -186,11 +187,11 @@ const ProductDetails = ({ data }) => {
                     </Link>
                     <h5 className="pb-3 text-[15px]">({averageRating}/5) Ratings product</h5>
                   </div>
-                  <div className={`${styles.button} bg-[#6443d1] mt-4 !rounded !h-11`} onClick={handleMessageSubmit}>
+                  {/* <div className={`${styles.button} bg-[#6443d1] mt-4 !rounded !h-11`} onClick={handleMessageSubmit}>
                     <span className="flex items-center">
                       Send Message <AiOutlineMessage className="ml-1" />
                     </span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

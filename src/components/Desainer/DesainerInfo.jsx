@@ -4,9 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { server } from "../../server";
 import styles from "../../styles/styles";
 import { IoIosArrowBack } from "react-icons/io";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-
+import Loading from "../Layout/Loading";
 const DesainerInfo = ({ isOwner }) => {
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
@@ -39,7 +37,7 @@ const DesainerInfo = ({ isOwner }) => {
   }, [data, id]);
 
   const logoutHandler = async () => {
-    axios.get(`${server}/user/logout`);
+    await axios.get(`${server}/user/logout`);
     window.location.reload();
   };
   const totalReviewsLength = Array.isArray(products) ? products.reduce((acc, product) => acc + product.reviews.length, 0) : 0;
@@ -52,7 +50,7 @@ const DesainerInfo = ({ isOwner }) => {
   return (
     <>
       {isLoading ? (
-        <Skeleton className="w-full h-[90vh]" />
+        <Loading  />
       ) : (
         <div className="800px:w-[25%] bg-[#fff] rounded-[4px] shadow-sm  800px:h-[90vh] 800px:sticky top-10 left-0 z-10">
           <button className="w-20 flex flex-row items-center font-bold m-4" onClick={handleBack}>

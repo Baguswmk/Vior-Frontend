@@ -6,7 +6,6 @@ import DesainerPreviewPage from "../pages/Desainer/DesainerPreviewPage";
 import DesainerAllOrders from "../pages/Desainer/DesainerAllOrders";
 import DesainerOrderDetails from "../pages/Desainer/DesainerOrderDetails";
 import DesainerSettingsPage from "../pages/Desainer/DesainerSettingsPage";
-// import DesainerInboxPage from "../pages/Desainer/DesainerInboxPage";
 import DesainerHomePage from "../pages/Desainer/DesainerHomePage";
 
 export { DesainerDashboardPage, DesainerCreateProduct, DesainerAllWithdraw, DesainerAllProducts, DesainerPreviewPage, DesainerAllOrders, DesainerOrderDetails, DesainerSettingsPage,  DesainerHomePage };

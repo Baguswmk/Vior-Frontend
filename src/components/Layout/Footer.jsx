@@ -1,13 +1,13 @@
 import { AiFillFacebook, AiFillInstagram, AiFillYoutube, AiOutlineTwitter } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { footerCompanyLinks, footerProductLinks, footerSupportLinks } from "../../static/data";
-import logoW from "../../Assests/images/logo/whiteLogo.svg";
+import logoW from "../../Assests/images/logo/whiteLogo.webp";
 const Footer = () => {
   return (
     <div className="bg-[#323334] text-white">
       <div className="grid grid-cols-1 sm:gird-cols-3 lg:grid-cols-4 gap-6 sm:px-8 px-5 py-16 sm:text-center">
         <ul className="px-5 text-center sm:text-start flex sm:block flex-col items-center">
-          <img loading="lazy" src={logoW} alt="Logo" style={{ filter: "brightness(0) invert(1)", width: "300px", height: "100px" }} />
+          <img loading="lazy" src={logoW} alt="Logo" style={{ filter: "brightness(0) invert(1)" }} className="w-[100px] h-[100px] " />
           <br />
           <p>Transforming Spaces, Inspiring Lives: Your Ultimate Interior Design Destination</p>
           <div className="flex items-center mt-[15px]">

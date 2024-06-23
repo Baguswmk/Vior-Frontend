@@ -28,7 +28,7 @@ const OrderDetails = () => {
   const orderUpdateHandler = async (id) => {
     try {
       setLoading(true);
-      dispatch(updateStatus(id, status));
+     await dispatch(updateStatus(id, status));
     } catch (error) {
       toast.error(error);
     }
@@ -122,7 +122,6 @@ const OrderDetails = () => {
       <div className={`${styles.button} mt-5 !bg-[#FCE1E6] !rounded-[4px]  font-[600] !h-[45px] text-[18px]`} onClick={data.status !== "Processing refund" ? orderUpdateHandler : refundOrderUpdateHandler}>
         Update Status
       </div>
-      {/* text-[#E94560] */}
     </div>
   );
 };

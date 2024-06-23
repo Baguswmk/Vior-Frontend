@@ -11,13 +11,13 @@ const Wishlist = ({ setOpenWishlist }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
 
-  const removeFromWishlistHandler = (data) => {
-    dispatch(removeFromWishlist(data));
+  const removeFromWishlistHandler = async (data) => {
+    await dispatch(removeFromWishlist(data));
   };
 
-  const addToCartHandler = (data) => {
+  const addToCartHandler = async (data) => {
     const newData = { ...data, qty: 1 };
-    dispatch(addTocart(newData));
+    await dispatch(addTocart(newData));
     setOpenWishlist(false);
   };
 
@@ -38,7 +38,7 @@ const Wishlist = ({ setOpenWishlist }) => {
                 <RxCross1 size={25} className="cursor-pointer" onClick={() => setOpenWishlist(false)} />
               </div>
               {/* Item length */}
-              <div className={`${styles.noramlFlex} p-4`}>
+              <div className={`${styles.normalFlex} p-4`}>
                 <AiOutlineHeart size={25} />
                 <h5 className="pl-2 text-[20px] font-[500]">{wishlist && wishlist.length} items</h5>
               </div>
@@ -55,6 +55,7 @@ const Wishlist = ({ setOpenWishlist }) => {
 };
 
 const CartSingle = ({ data, removeFromWishlistHandler, addToCartHandler }) => {
+  // eslint-disable-next-line no-unused-vars
   const [value, setValue] = useState(1);
   const totalPrice = data.price * value;
 

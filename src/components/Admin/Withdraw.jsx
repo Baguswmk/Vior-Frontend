@@ -25,7 +25,7 @@ const Withdraw = () => {
     setOpen(true);
   };
   const handleSubmit = async () => {
-    dispatch(updateWithdrawRequest(withdrawId, withdrawStatus, desainerId));
+    await dispatch(updateWithdrawRequest(withdrawId, withdrawStatus, desainerId));
     window.location.reload();
     setOpen(false);
   };

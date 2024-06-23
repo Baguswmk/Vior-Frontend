@@ -24,22 +24,22 @@ const Users = () => {
     dispatch(getAllUsers());
   }, [dispatch]);
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (userId) {
-      dispatch(deleteUser(id));
+      await dispatch(deleteUser(id));
     }
     setOpenDelete(false);
   };
 
-  const handleFormSubmit = (data) => {
+  const handleFormSubmit = async (data) => {
     if (userId) {
-      dispatch(updateUser(userId, data));
+      await  dispatch(updateUser(userId, data));
       setSuccess(true);
       if (success) {
         window.location.reload();
       }
     } else {
-      dispatch(createUser(data));
+      await dispatch(createUser(data));
     }
     setOpenForm(false);
   };

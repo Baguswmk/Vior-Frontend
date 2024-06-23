@@ -36,7 +36,7 @@ const DesainerSettings = () => {
       phoneNumber,
     };
     try {
-      dispatch(updateUser(data));
+     await dispatch(updateUser(data));
     } catch (error) {
       toast.error(error.response.data.message);
     }

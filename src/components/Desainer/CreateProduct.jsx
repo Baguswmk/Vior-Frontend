@@ -62,7 +62,7 @@ const CreateProduct = () => {
     });
 
     try {
-      await dispatch(createProduct(formData)); // Menunggu hasil dari action createProduct
+      await dispatch(createProduct(formData));
       if (success) {
         toast.success("Product created successfully");
         navigate("/dashboard-products");

@@ -89,13 +89,13 @@ export const brandingData = [
   },
 ];
 
-import dinningRoom from "../Assests/images/icons/dinningRoom.png";
-import bedroom from "../Assests/images/icons/bedRoom.png";
-import bathroom from "../Assests/images/icons/bathRoom.png";
-import livingRoom from "../Assests/images/icons/livingRoom.png";
-import officeRoom from "../Assests/images/icons/officeRoom.png";
-import kitchen from "../Assests/images/icons/kitchen.png";
-import other from "../Assests/images/icons/other1.png";
+import dinningRoom from "../Assests/images/icons/dinningRoom.webp";
+import bedroom from "../Assests/images/icons/bedRoom.webp";
+import bathroom from "../Assests/images/icons/bathRoom.webp";
+import livingRoom from "../Assests/images/icons/livingRoom.webp";
+import officeRoom from "../Assests/images/icons/officeRoom.webp";
+import kitchen from "../Assests/images/icons/kitchen.webp";
+import other from "../Assests/images/icons/other.webp";
 // categories data
 export const categoriesData = [
   {

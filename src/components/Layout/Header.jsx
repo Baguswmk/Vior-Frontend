@@ -1,9 +1,9 @@
+import { categoriesData } from "../../static/data";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../styles/styles";
-import { categoriesData } from "../../static/data";
 import { AiOutlineHeart, AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
-import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import DropDown from "./DropDown";
@@ -12,9 +12,9 @@ import { useSelector } from "react-redux";
 import Cart from "../Cart/Cart";
 import Wishlist from "../Wishlist/Wishlist";
 import { RxCross1 } from "react-icons/rx";
-import logo from "../../Assests/images/logo/blackLogo.png";
-import logoW from "../../Assests/images/logo/fullLogo.png";
-import logoM from "../../Assests/images/logo/whiteLogo.svg";
+import logo from "../../Assests/images/logo/blackLogo.webp";
+import logoW from "../../Assests/images/logo/fullLogo.webp";
+import logoM from "../../Assests/images/logo/whiteLogo.webp";
 
 const Header = ({ activeHeading }) => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -91,21 +91,21 @@ const Header = ({ activeHeading }) => {
 
           {/* Icons */}
           <div className="flex">
-            <div className={`${styles.noramlFlex}`}>
+            <div className={`${styles.normalFlex}`}>
               <div className="relative cursor-pointer mr-[15px]" onClick={() => setOpenWishlist(true)}>
                 <AiOutlineHeart size={30} color="rgb(0 0 0/ 70%)" />
                 <span className="absolute right-0 top-0 rounded-full bg-[#F2994A] w-4 h-4  p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">{wishlist && wishlist.length}</span>
               </div>
             </div>
 
-            <div className={`${styles.noramlFlex}`}>
+            <div className={`${styles.normalFlex}`}>
               <div className="relative cursor-pointer mr-[15px]" onClick={() => setOpenCart(true)}>
                 <AiOutlineShoppingCart size={30} color="rgb(0 0 0/70%)" />
                 <span className="absolute right-0 top-0 rounded-full bg-[#F2994A] w-4 h-4 p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">{cart && cart.length}</span>
               </div>
             </div>
 
-            <div className={`${styles.noramlFlex}`}>
+            <div className={`${styles.normalFlex}`}>
               <div className="relative cursor-pointer mr-[15px]">
                 {isAuthenticated ? (
                   <Link to="/profile">
@@ -118,13 +118,6 @@ const Header = ({ activeHeading }) => {
                 )}
               </div>
             </div>
-            {/* <div className={`${styles.button}`}>
-              <Link to={"/dashboard"}>
-                <h1 className=" flex items-center">
-                  {isSeller ? "Go Dashboard" : "Join as Designer"} <IoIosArrowForward className="ml-1" />
-                </h1>
-              </Link>
-            </div> */}
 
             {/* cart popup */}
             {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
@@ -143,12 +136,12 @@ const Header = ({ activeHeading }) => {
           <div className={` ${active === true ? "flex items-end" : "hidden"} `}>
             <Link to="/" className=" ">
               <div className="flex lg:flex-row items-center space-x-2 cursor-pointer">
-                <img loading="lazy" src={logoM} alt="Logo" className="h-18 w-52" />
+                <img loading="lazy" src={logoM} alt="Logo" className="w-12" />
               </div>
             </Link>
           </div>
           {/* navitems */}
-          <div className={`${styles.noramlFlex} w-full justify-center`}>
+          <div className={`${styles.normalFlex} w-full justify-center`}>
             <Navbar active={activeHeading} />
             {/* categories */}
             <div className="mx-4" onClick={() => setDropDown(!dropDown)}>
@@ -203,8 +196,7 @@ const Header = ({ activeHeading }) => {
           <div className="my-2">
             <Link to="/">
               <div className="flex lg:flex-row items-center space-x-2 cursor-pointer">
-                {" "}
-                <img loading="lazy" src={logoW} alt="Logo" className="h-12 w-40" />
+                <img loading="lazy" src={logoW} alt="Logo" className="h-12 w-36" />
               </div>
             </Link>
           </div>
@@ -283,16 +275,6 @@ const Header = ({ activeHeading }) => {
                   {dropDown ? <DropDown categoriesData={categoriesData} setDropDown={setDropDown} /> : null}
                 </div>
               </div>
-              <div className={`${styles.button} mx-4 !rounded-[4px]`}>
-                <Link to="/register">
-                  <h1 className=" flex items-center">
-                    Join as Designer <IoIosArrowForward className="ml-1" />
-                  </h1>
-                </Link>
-              </div>
-              <br />
-              <br />
-              <br />
             </div>
           </div>
         )}
