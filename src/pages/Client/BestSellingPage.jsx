@@ -30,7 +30,7 @@ const BestSellingPage = () => {
                 <ProductCard data={product} key={index} />
               ))}
             </div>
-            {data.length === 0 && <h1 className="text-center w-full pb-[100px] text-[20px]">No products Found!</h1>}
+            {data.length === 0 && <h1 className="text-center w-full pb-[100px] text-[20px]">Product not found!</h1>}
           </div>
           <Footer />
         </div>

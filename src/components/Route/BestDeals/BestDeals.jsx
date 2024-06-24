@@ -27,7 +27,7 @@ const BestDeals = () => {
           ))}
         </div>
       ) : (
-        <h1 className="text-center w-full pb-[100px] text-[20px]">No products Found!</h1>
+        <h1 className="text-center w-full pb-[100px] text-[20px]">Product not found!</h1>
       )}
     </div>
   );
