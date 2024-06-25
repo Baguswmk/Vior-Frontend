@@ -206,7 +206,7 @@ const ProductDetails = ({ data }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50" onClick={closeModal}></div>
           <div className="relative bg-white w-11/12 h-screen rounded-lg overflow-hidden ">
             <BaseScene>
-              <Viewer model={{ url: data.models3d[0].url }} args={[0.5, 1, 0.5]} scale={1} position={[2, 0.3, 0]} />
+              <Viewer model={{ url: "https://vior-backend.vercel.app" + data.models3d[0].url }} args={[0.5, 1, 0.5]} scale={1} position={[2, 0.3, 0]} />
               <BaseCharacter controls position={[2, 1, 3]} args={[0.8]} color="yellow" />
               <Sky />
             </BaseScene>
