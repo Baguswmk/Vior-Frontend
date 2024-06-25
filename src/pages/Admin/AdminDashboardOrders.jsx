@@ -1,6 +1,6 @@
 import AdminHeader from "../../components/Admin/Layout/AdminHeader";
 import AdminSideBar from "../../components/Admin/Layout/AdminSideBar";
-import AllOrders from "../../components/Admin/Orders";
+import Orders from "../../components/Admin/Orders";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getAllOrdersAdmin } from "../../redux/actions/order";
@@ -20,7 +20,7 @@ const AdminDashboardOrders = () => {
           <div className="w-[80px] 800px:w-[330px]">
             <AdminSideBar active={2} />
           </div>
-          <AllOrders />
+          <Orders />
         </div>
       </div>
     </div>

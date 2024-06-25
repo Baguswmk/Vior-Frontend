@@ -10,6 +10,7 @@ const BasicScene = ({ children }) => {
     <div className='w-full h-screen'>
       <Canvas shadows camera={{ fov: 50 }}>
         <Lights />
+          
 
         <Physics gravity={[0, -9.8, 0]}>
           {children}

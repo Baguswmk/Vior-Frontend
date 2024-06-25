@@ -4,6 +4,7 @@ const initialOrderState = {
   isLoading: true,
   adminOrderLoading: false,
   orders: [],
+  desainerOrders: [],
   error: null,
   success: false,
   errorMessage: null,
@@ -25,6 +26,19 @@ export const orderReducer = createReducer(initialOrderState, (builder) => {
       state.isLoading = false;
       state.error = action.payload;
     })
+    .addCase("getAllOrdersDesainerRequest", (state) => {
+      state.isLoading = true;
+    })
+    .addCase("getAllOrdersDesainerSuccess", (state, action) => {
+      state.isLoading = false;
+      state.desainerOrders = action.payload;
+      state.success = true;
+    })
+    .addCase("getAllOrdersDesainerFailed", (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    })
+
     .addCase("createOrderRequest", (state) => {
       state.isLoading = true;
       state.success = false;

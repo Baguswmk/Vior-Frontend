@@ -1,4 +1,4 @@
-import { BiMessageSquareDetail } from "react-icons/bi";
+// import { BiMessageSquareDetail } from "react-icons/bi";
 import { FiPackage, FiShoppingBag } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -41,9 +41,9 @@ const AdminHeader = () => {
           <Link to="/dashboard-orders" className="800px:block hidden">
             <FiPackage color="#555" size={30} className="mx-5 cursor-pointer" />
           </Link>
-          <Link to="/dashboard-messages" className="800px:block hidden">
+          {/* <Link to="/dashboard-messages" className="800px:block hidden">
             <BiMessageSquareDetail color="#555" size={30} className="mx-5 cursor-pointer" />
-          </Link>
+          </Link> */}
           <Link to="/profile">
             <img
               loading="lazy"

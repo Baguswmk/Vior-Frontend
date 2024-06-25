@@ -65,7 +65,7 @@ export const getAllOrders = (userId) => async (dispatch) => {
 export const getAllOrdersDesainer = (userId) => async (dispatch) => {
   try {
     dispatch({
-      type: "getAllOrdersRequest",
+      type: "getAllOrdersDesainerRequest",
     });
     const token = localStorage.getItem("token");
     if (!token) throw new Error("No token found");
@@ -78,12 +78,12 @@ export const getAllOrdersDesainer = (userId) => async (dispatch) => {
 
     const { data } = await axios.get(`${server}/order/get-desainer-all-orders/${userId}`, config);
     dispatch({
-      type: "getAllOrdersSuccess",
+      type: "getAllOrdersDesainerSuccess",
       payload: data.orders,
     });
   } catch (error) {
     dispatch({
-      type: "getAllOrdersFailed",
+      type: "getAllOrdersDesainerFailed",
       payload: error.response.data.message,
     });
   }

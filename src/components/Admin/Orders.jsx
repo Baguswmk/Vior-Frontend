@@ -73,8 +73,8 @@ const Orders = () => {
   ];
 
   const formatPrice = (price) => `Rp. ${price.toLocaleString()}`;
-
-  const rows = orders.map((order) => ({
+  const orderArray = Array.isArray(orders) ? orders : [];
+  const rows = orderArray.map((order) => ({
     id: order._id,
     itemsQty: order.cart.reduce((acc, item) => acc + item.qty, 0),
     total: formatPrice(order.totalPrice),

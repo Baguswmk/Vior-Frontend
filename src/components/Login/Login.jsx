@@ -5,26 +5,33 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { loginUser } from "../../redux/actions/user";
 import { useDispatch } from "react-redux";
+import Loading from "../Layout/Loading";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     await dispatch(loginUser(email, password))
       .then(() => {
         toast.success("Login successful");
       })
       .catch((err) => {
         toast.error(err.response.data.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      {isLoading && <Loading />}
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Login to your account</h2>
       </div>

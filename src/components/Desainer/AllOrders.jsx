@@ -8,7 +8,7 @@ import { getAllOrdersDesainer } from "../../redux/actions/order";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
 const AllOrders = ({ role }) => {
-  const { orders, isLoading } = useSelector((state) => state.order);
+  const { desainerOrders, isLoading } = useSelector((state) => state.order);
   const { user } = useSelector((state) => state.user) || {};
   const dispatch = useDispatch();
 
@@ -62,8 +62,9 @@ const AllOrders = ({ role }) => {
       },
     },
   ];
+  const orderArray = Array.isArray(desainerOrders) ? desainerOrders : [];
 
-  const rows = orders.map((item) => ({
+  const rows = orderArray.map((item) => ({
     id: item._id,
     itemsQty: item.cart.length,
     total: "Rp. " + item.totalPrice,

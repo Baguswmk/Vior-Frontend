@@ -1,7 +1,7 @@
 import { FiPackage, FiShoppingBag } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { BiMessageSquareDetail } from "react-icons/bi";
+// import { BiMessageSquareDetail } from "react-icons/bi";
 import logo from "../../../Assests/images/logo/fullLogo.webp";
 import { useEffect } from "react";
 const DashboardHeader = () => {
@@ -29,9 +29,9 @@ const DashboardHeader = () => {
           <Link to="/dashboard-orders" className="800px:block hidden">
             <FiPackage color="#555" size={30} className="mx-5 cursor-pointer" />
           </Link>
-          <Link to="/dashboard-messages" className="800px:block hidden">
+          {/* <Link to="/dashboard-messages" className="800px:block hidden">
             <BiMessageSquareDetail color="#555" size={30} className="mx-5 cursor-pointer" />
-          </Link>
+          </Link> */}
           <Link to={`/profile`}>
             <img loading="lazy" src={`${user.avatar.url}`} alt="" className="w-[50px] h-[50px] rounded-full object-cover" />
           </Link>

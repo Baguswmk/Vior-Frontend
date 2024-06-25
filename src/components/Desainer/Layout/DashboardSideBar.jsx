@@ -3,7 +3,8 @@ import { FiPackage, FiShoppingBag } from "react-icons/fi";
 import { RxDashboard } from "react-icons/rx";
 import { CiSettings } from "react-icons/ci";
 import { Link } from "react-router-dom";
-import { BiMessageSquareDetail } from "react-icons/bi";
+// import { BiMessageSquareDetail } from "react-icons/bi";
+import { FaMoneyBillTransfer } from "react-icons/fa6";
 
 const DashboardSideBar = ({ active }) => {
   return (
@@ -32,7 +33,7 @@ const DashboardSideBar = ({ active }) => {
 
       <div className="w-full flex items-center p-4">
         <Link to="/dashboard-withdraw" className="w-full flex items-center">
-          <FiPackage size={30} color={`${active === 4 ? "crimson" : "#555"}`} />
+          <FaMoneyBillTransfer size={30} color={`${active === 4 ? "crimson" : "#555"}`} />
           <h5 className={`hidden 800px:block pl-2 text-[18px] font-[400] ${active === 4 ? "text-[crimson]" : "text-[#555]"}`}>All Withdraw</h5>
         </Link>
       </div>
@@ -44,12 +45,12 @@ const DashboardSideBar = ({ active }) => {
         </Link>
       </div>
 
-      <div className="w-full flex items-center p-4">
+      {/* <div className="w-full flex items-center p-4">
         <Link to="/dashboard-messages" className="w-full flex items-center">
           <BiMessageSquareDetail size={30} color={`${active === 8 ? "crimson" : "#555"}`} />
           <h5 className={`hidden 800px:block pl-2 text-[18px] font-[400] ${active === 8 ? "text-[crimson]" : "text-[#555]"}`}>Messages</h5>
         </Link>
-      </div>
+      </div> */}
 
       <div className="w-full flex items-center p-4">
         <Link to="/settings" className="w-full flex items-center">

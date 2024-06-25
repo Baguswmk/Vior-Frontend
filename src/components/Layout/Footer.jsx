@@ -23,7 +23,7 @@ const Footer = () => {
           {footerCompanyLinks.map((link, index) => (
             <li key={index}>
               <Link
-                className="text-gray-400 hover:text-teal-400 duration-300
+                className="text-gray-400 hover:text-[#FFD700] duration-300
                    text-sm cursor-pointer leading-6"
                 to={link.link}
               >
@@ -38,7 +38,7 @@ const Footer = () => {
           {footerProductLinks.map((link, index) => (
             <li key={index}>
               <Link
-                className="text-gray-400 hover:text-teal-400 duration-300
+                className="text-gray-400 hover:text-[#FFD700] duration-300
                    text-sm cursor-pointer leading-6"
                 to={link.link}
               >
@@ -53,7 +53,7 @@ const Footer = () => {
           {footerSupportLinks.map((link, index) => (
             <li key={index}>
               <Link
-                className="text-gray-400 hover:text-teal-400 duration-300
+                className="text-gray-400 hover:text-[#FFD700] duration-300
                    text-sm cursor-pointer leading-6"
                 to={link.link}
               >
