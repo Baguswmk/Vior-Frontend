@@ -44,7 +44,6 @@ const Wishlist = ({ setOpenWishlist }) => {
               </div>
 
               {/* cart Single Items */}
-              <br />
               <div className="w-full border-t">{wishlist && wishlist.map((i, index) => <CartSingle key={index} data={i} removeFromWishlistHandler={removeFromWishlistHandler} addToCartHandler={addToCartHandler} />)}</div>
             </div>
           </>
@@ -61,7 +60,7 @@ const CartSingle = ({ data, removeFromWishlistHandler, addToCartHandler }) => {
 
   return (
     <div className="border-b p-4">
-      <div className="w-full 800px:flex items-center">
+      <div className="w-full 800px:flex items-center ">
         <RxCross1 className="cursor-pointer 800px:mb-['unset'] 800px:ml-['unset'] mb-2 ml-2" onClick={() => removeFromWishlistHandler(data)} />
         <img loading="lazy" src={`${data.images[0].url}`} alt="" className="w-[130px] h-min ml-2 mr-2 rounded-[5px]" />
 
@@ -69,7 +68,7 @@ const CartSingle = ({ data, removeFromWishlistHandler, addToCartHandler }) => {
           <h1>{data.name}</h1>
           <h4 className="font-[600] pt-3 800px:pt-[3px] text-[17px] text-[#d02222] font-Roboto">Rp. {totalPrice}</h4>
         </div>
-        <div>
+        <div className="800px:ml-auto">
           <BsCartPlus size={20} className="cursor-pointer" tile="Add to cart" onClick={() => addToCartHandler(data)} />
         </div>
       </div>

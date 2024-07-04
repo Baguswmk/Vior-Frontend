@@ -60,13 +60,14 @@ const RegisterForm = ({ role, handleBack }) => {
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                 Fullname
+                <span className="ml-1 text-red-400">*</span>
               </label>
               <div className="mt-1">
                 <input
                   type="text"
-                  name="text"
+                  name="name"
                   autoComplete="name"
                   required
                   value={name}
@@ -75,10 +76,10 @@ const RegisterForm = ({ role, handleBack }) => {
                 />
               </div>
             </div>
-
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email address
+                <span className="ml-1 text-red-400">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -92,10 +93,10 @@ const RegisterForm = ({ role, handleBack }) => {
                 />
               </div>
             </div>
-
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
+                <span className="ml-1 text-red-400">*</span>
               </label>
               <div className="mt-1 relative">
                 <input
@@ -114,18 +115,18 @@ const RegisterForm = ({ role, handleBack }) => {
                 )}
               </div>
             </div>
-
             <div>
-              <label htmlFor="avatar" className="block text-sm font-medium text-gray-700"></label>
+              <label htmlFor="avatar" className="block text-sm font-medium text-gray-700">
+                Upload a file <span className="text-red-400">*</span>
+              </label>
               <div className="mt-2 flex items-center">
                 <span className="inline-block h-8 w-8 rounded-full overflow-hidden">{avatar ? <img loading="lazy" src={avatar} alt="avatar" className="h-full w-full object-cover rounded-full" /> : <RxAvatar className="h-8 w-8" />}</span>
                 <label htmlFor="file-input" className="ml-5 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
                   <span>Upload a file</span>
-                  <input type="file" name="avatar" id="file-input" accept=".jpg,.jpeg,.png" onChange={handleFileInputChange} className="sr-only" />
+                  <input type="file" name="avatar" id="file-input" accept=".jpg,.jpeg,.png" onChange={handleFileInputChange} className="sr-only" required />
                 </label>
               </div>
             </div>
-
             <div>
               <button
                 type="submit"

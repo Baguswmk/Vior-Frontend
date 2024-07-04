@@ -21,8 +21,8 @@ const CardOnHover = ({ role, position, visible }) => {
     >
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {role === "pembeli" && "Pembeli"}
-          {role === "desainer" && "Desainer"}
+          {role === "pembeli" && "Buyer"}
+          {role === "desainer" && "Designer"}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {role === "pembeli" && "A buyer can purchase products and browse available designs on our platform. Buyers do not have access to create new designs."}

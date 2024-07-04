@@ -207,13 +207,16 @@ const ProductDetails = ({ data }) => {
           <div className="relative bg-white w-11/12 h-screen rounded-lg overflow-hidden ">
             <BaseScene>
               <Viewer model={{ url: "https://vior-backend.vercel.app" + data.models3d[0].url }} args={[0.5, 1, 0.5]} scale={1} position={[2, 0.2, 0]} />
+              {/* <Viewer model={{ url: "https://api-vior.vior-e-commerce.my.id" + data.models3d[0].url }} args={[0.5, 1, 0.5]} scale={1} position={[2, 0.29, 0]} /> */}
+              {/* <Viewer model={{ url: "http://localhost:8000" + data.models3d[0].url }} args={[0.5, 1, 0.5]} scale={1} position={[2, 0.29, 0]} /> */}
               <BaseCharacter controls position={[2, 1, 3]} args={[0.8]} color="yellow" />
               <Sky />
             </BaseScene>
             <button onClick={closeModal} className="z-[10000] absolute top-0 right-0 m-2 text-red-600 p-2 rounded-full bg-white">
               <AiOutlineClose />
             </button>
-            <div className="absolute top-2 right-2 text-white text-sm">
+
+            <div className="hidden md:flex absolute top-2 right-2 text-white text-sm">
               <p className="mb-1">Kontrol:</p>
               <ul>
                 <li>W: Maju</li>
@@ -309,11 +312,10 @@ const ProductDetailsInfo = ({ data, products, totalReviewsLength, averageRating 
               <h5 className="font-[600] pt-3">
                 Total Reviews Product: <span className="font-[500]">{totalReviewsLength}</span>
               </h5>
-              <Link to={`/desainer/preview/${data._id}`}>
-                <div className={`${styles.button} !rounded-[4px] items-center mt-3`}>
-                  <h4>Visit Desainer</h4>
-                </div>
-              </Link>
+
+              <div className={`${styles.button} !rounded-[4px] items-center mt-3`}>
+                <h4>Visit Desainer</h4>
+              </div>
             </div>
           </div>
         </div>

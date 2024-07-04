@@ -2,7 +2,6 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdDesignServices } from "react-icons/md";
-
 import { useState } from "react";
 import CardOnHover from "./HoverRegsiterCard";
 
@@ -11,28 +10,23 @@ const RegisterCard = ({ onSelectRole }) => {
   const [selectedRole, setSelectedRole] = useState(null);
   const [cardSelected, setCardSelected] = useState(false);
   const [hoverVisible, setHoverVisible] = useState(false);
-
   const handleMouseEnter = (e, role) => {
     setMousePosition({ x: e.clientX, y: e.clientY });
     setSelectedRole(role);
     setHoverVisible(true);
   };
-
   const handleMouseLeave = () => {
     setSelectedRole(null);
     setHoverVisible(false);
   };
-
   const handleMouseMove = (e) => {
     setMousePosition({ x: e.clientX, y: e.clientY });
   };
-
   const handleCardClick = (role) => {
     setSelectedRole(role);
     setCardSelected(true);
     onSelectRole(role);
   };
-
   return (
     <div className="w-full flex flex-col mb-4">
       <div className="my-12 md:my-32">

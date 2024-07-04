@@ -25,15 +25,14 @@ const UserOrderDetails = () => {
   const { id } = useParams();
   const [orderData, setOrderData] = useState({});
   const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(getOrderDetails(id));
   }, [dispatch, id]);
-
   useEffect(() => {
     const orderData = JSON.parse(localStorage.getItem("latestOrder"));
     setOrderData(orderData);
   }, [dispatch]);
-
   const data = orders;
   const reviewHandler = async () => {
     const token = localStorage.getItem("token");
@@ -194,7 +193,6 @@ const UserOrderDetails = () => {
           <h1 className="pl-2 text-[25px]">Order Details</h1>
         </div>
       </div>
-
       <div className="w-full flex items-center justify-between pt-6">
         <h5 className="text-[#00000084]">
           Order ID: <span>#{data?._id?.slice(0, 8)}</span>
@@ -203,9 +201,7 @@ const UserOrderDetails = () => {
           Placed on: <span>{data?.createdAt?.slice(0, 10)}</span>
         </h5>
       </div>
-
       {/* order items */}
-      <br />
       {data &&
         data.cart &&
         data.cart.map((item, index) => {
@@ -226,7 +222,6 @@ const UserOrderDetails = () => {
             </div>
           );
         })}
-
       {/* review popup */}
       {open && (
         <div className="w-full fixed top-0 left-0 h-screen bg-[#0005] z-50 flex items-center justify-center">
@@ -235,7 +230,6 @@ const UserOrderDetails = () => {
               <RxCross1 size={30} onClick={() => setOpen(false)} className="cursor-pointer" />
             </div>
             <h2 className="text-[30px] font-[500] font-Poppins text-center">Give a Review</h2>
-            <br />
             <div className="w-full flex">
               <img loading="lazy" src={`${selectedItem.images[0].url}`} alt="" className="w-[80px] h-[80px]" />
               <div>
@@ -245,10 +239,6 @@ const UserOrderDetails = () => {
                 </h4>
               </div>
             </div>
-
-            <br />
-            <br />
-
             {/* ratings */}
             <h5 className="pl-3 text-[20px] font-[500]">
               Give a Rating <span className="text-red-500">*</span>
@@ -262,7 +252,6 @@ const UserOrderDetails = () => {
                 )
               )}
             </div>
-            <br />
             <div className="w-full ml-3">
               <label className="block text-[20px] font-[500]">
                 Write a comment
@@ -285,27 +274,18 @@ const UserOrderDetails = () => {
           </div>
         </div>
       )}
-
       <div className="border-t w-full text-right">
         <h5 className="pt-3 text-[18px]">
           Total Price: <strong>Rp. {data.totalPrice}</strong>
         </h5>
       </div>
-      <br />
-      <br />
-
-      <br />
       <div className="w-full flex items-center justify-center gap-5">
-        {/* <Link to="/">
-          <div className={`${styles.button} `}>Send Message</div>
-        </Link> */}
         {data.status === "Processing" ? (
           <button className={`${styles.button} !bg-[#f63b60] text-white h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`} onClick={createMidtransTransaction}>
             Pay Now
           </button>
         ) : null}
       </div>
-      <br />
     </div>
   );
 };

@@ -17,6 +17,7 @@ const AllProducts = () => {
   const [openDelete, setOpenDelete] = useState(false);
   const [productId, setProductId] = useState(null);
   const [initialData, setInitialData] = useState({ name: "", price: "", stock: "", sold: "" });
+  const [notification, setNotification] = useState(null); // State untuk pemberitahuan
 
   useEffect(() => {
     if (user && user._id) {
@@ -24,50 +25,44 @@ const AllProducts = () => {
     }
   }, [dispatch, user]);
 
-  const handleDelete = (id) => {
-    dispatch(deleteProduct(id));
-    setOpenDelete(false);
+  const handleDelete = async (id) => {
+    try {
+      await dispatch(deleteProduct(id));
+      setOpenDelete(false);
+      setNotification("Product deleted successfully!"); // Atur pemberitahuan setelah berhasil menghapus
+      // Muat ulang data produk setelah penghapusan
+      dispatch(getAllProductsDesainer(user._id));
+    } catch (error) {
+      console.error("Error deleting product:", error.message);
+    }
   };
 
-  const handleUpdate = (id) => {
-    dispatch(updateProduct(id));
-    setOpenForm(false);
+  const handleUpdate = async (formData) => {
+    try {
+      await dispatch(updateProduct(formData));
+      setOpenForm(false);
+      setNotification("Product updated successfully!"); // Atur pemberitahuan setelah berhasil mengupdate
+      // Muat ulang data produk setelah pembaruan
+      dispatch(getAllProductsDesainer(user._id));
+    } catch (error) {
+      console.error("Error updating product:", error.message);
+    }
   };
+
   const getProductById = (id) => {
     return products.find((product) => product._id === id) || { name: "", price: "", stock: "", sold: "" };
   };
+
   const columns = [
     { field: "id", headerName: "Product Id", minWidth: 150, flex: 0.7 },
-    {
-      field: "name",
-      headerName: "Name Product",
-      minWidth: 180,
-      flex: 1.4,
-    },
-    {
-      field: "price",
-      headerName: "Price",
-      minWidth: 100,
-      flex: 0.6,
-    },
-    {
-      field: "Stock",
-      headerName: "Stock",
-      type: "number",
-      minWidth: 80,
-      flex: 0.5,
-    },
-    {
-      field: "sold",
-      headerName: "Sold out",
-      type: "number",
-      minWidth: 130,
-      flex: 0.6,
-    },
+    { field: "name", headerName: "Name Product", minWidth: 180, flex: 1.4 },
+    { field: "price", headerName: "Price", minWidth: 100, flex: 0.6 },
+    { field: "Stock", headerName: "Stock", type: "number", minWidth: 80, flex: 0.5 },
+    { field: "sold", headerName: "Sold out", type: "number", minWidth: 130, flex: 0.6 },
     {
       field: "Button",
       flex: 0.8,
-      minWidth: 120,
+      minWidth: 100,
       headerName: "",
       type: "number",
       sortable: false,
@@ -107,13 +102,43 @@ const AllProducts = () => {
 
   return (
     <div style={{ height: 400, width: "100%" }}>
-      {isLoading ? <Loading /> : <DataGrid rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} checkboxSelection disableSelectionOnClick />}{" "}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          {notification && (
+            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+              <strong className="font-bold">Success!</strong>
+              <span className="block sm:inline"> {notification}</span>
+              <span className="absolute top-0 bottom-0 right-0 px-4 py-3" onClick={() => setNotification(null)}>
+                <svg className="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                  <title>Close</title>
+                  <path
+                    fill-rule="evenodd"
+                    d="M14.293 5.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 111.414-1.414L10 8.586l4.293-4.293z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </span>
+            </div>
+          )}
+          <DataGrid rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} checkboxSelection disableSelectionOnClick />
+        </>
+      )}
       {openDelete && (
         <Modal open={openDelete} onClose={() => setOpenDelete(false)}>
-          <div>
-            <h3>Are you sure you want to delete this product?</h3>
-            <Button onClick={() => handleDelete(productId)}>Confirm</Button>
-            <Button onClick={() => setOpenDelete(false)}>Cancel</Button>
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div>
+              <h3 className="text-lg font-bold mb-4">Are you sure you want to delete this product?</h3>
+              <div className="flex justify-end">
+                <button className="bg-red-500 hover:bg-red-600 text-white  py-2 px-4 rounded mr-2" onClick={() => handleDelete(productId)}>
+                  Confirm
+                </button>
+                <button className="bg-gray-300 hover:bg-gray-400 text-gray-800  py-2 px-4 rounded" onClick={() => setOpenDelete(false)}>
+                  Cancel
+                </button>
+              </div>
+            </div>
           </div>
         </Modal>
       )}
@@ -125,6 +150,7 @@ const AllProducts = () => {
     </div>
   );
 };
+
 import { TextField } from "@mui/material";
 import { categoriesData } from "../../static/data";
 import { AiOutlineCloseCircle, AiOutlineFile, AiOutlinePlusCircle } from "react-icons/ai";
@@ -183,33 +209,28 @@ const ProductForm = ({ onSubmit, initialData }) => {
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div className=" bg-white  rounded-[4px] p-3">
         <h5 className="text-[30px] font-Poppins text-center">Update Product</h5>
-        <br />
         <div>
           <label className="pb-2">
             Name <span className="text-red-500">*</span>
           </label>
           <TextField type="text" value={name} onChange={(e) => setName(e.target.value)} className="mt-2 w-full" placeholder="Enter your product name..." required />
         </div>
-        <br />
         <div>
           <label className="pb-2">
             Description <span className="text-red-500">*</span>
           </label>
           <TextField type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="mt-2 w-full" placeholder="Enter your description..." required />
         </div>
-        <br />
         <div>
           <label className="pb-2">
             Price <span className="text-red-500">*</span>
           </label>
           <TextField type="number" value={price} onChange={(e) => setPrice(e.target.value)} className="mt-2 w-full" placeholder="Enter your product price..." required />
         </div>
-        <br />
         <div>
           <label className="pb-2">Product Stock</label>
           <TextField type="number" value={stock} onChange={(e) => setStock(e.target.value)} className="mt-2 w-full" placeholder="Enter your product stock..." />
         </div>
-        <br />
         <div>
           <label className="pb-2">
             Category <span className="text-red-500">*</span>
@@ -223,7 +244,6 @@ const ProductForm = ({ onSubmit, initialData }) => {
             ))}
           </select>
         </div>
-        <br />
         <div>
           <label className="pb-2">Upload Images</label>
           <input
@@ -251,7 +271,6 @@ const ProductForm = ({ onSubmit, initialData }) => {
             ))}
           </div>
         </div>
-        <br />
         <div>
           <label className="pb-2">Upload 3D Models</label>
           <input type="file" id="uploadModels" className="hidden" multiple onChange={handleModelChange} accept=".glb,.gltf,.obj,.skp" />
@@ -274,7 +293,6 @@ const ProductForm = ({ onSubmit, initialData }) => {
             ))}
           </div>
         </div>
-        <br />
         <div>
           <Button type="submit" variant="contained">
             {initialData.name ? "Update" : "Create"} Product

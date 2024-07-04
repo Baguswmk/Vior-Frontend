@@ -75,8 +75,16 @@ export const deleteProduct = (id) => async (dispatch) => {
     dispatch({
       type: "deleteProductRequest",
     });
+    const token = localStorage.getItem("token");
+    if (!token) throw new Error("No token found");
 
-    const { data } = await axios.delete(`${server}/product/delete-desainer-product/${id}`);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    const { data } = await axios.delete(`${server}/product/delete-product/${id}`, config);
 
     dispatch({
       type: "deleteProductSuccess",
@@ -218,4 +226,4 @@ export const adminUpdateProduct = (id, dataProduct) => async (dispatch) => {
       payload: error.response.data.message,
     });
   }
-}
+};

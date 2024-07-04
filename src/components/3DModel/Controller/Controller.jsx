@@ -1,8 +1,7 @@
+// Controller/Controller.js
 import { useState, useEffect } from "react";
+import nipplejs from "nipplejs";
 
-/*****************
- * Player Controls
- ****************/
 export const usePlayerControls = () => {
   const keys = { KeyW: "forward", KeyS: "backward", KeyA: "left", KeyD: "right", Space: "jump" };
   const moveFieldByKey = (key) => keys[key];
@@ -19,6 +18,32 @@ export const usePlayerControls = () => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
+
+  useEffect(() => {
+    let manager = null;
+
+    if (window.innerWidth < 800) {
+      // Setup nipplejs for joystick control
+      manager = nipplejs.create({
+        zone: document.getElementById("joystick"),
+        mode: "static",
+        position: { left: "50%", top: "50%" },
+        color: "red",
+      });
+
+      manager.on("move", (evt, data) => {
+        const { angle, distance } = data;
+        // Adjust movement based on joystick angle and distance
+        // Implement your movement logic here based on angle and distance
+      });
+    }
+
+    return () => {
+      if (manager) {
+        manager.destroy();
+      }
     };
   }, []);
 

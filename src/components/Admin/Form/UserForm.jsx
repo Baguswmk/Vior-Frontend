@@ -50,7 +50,7 @@ const UserForm = ({ onSubmit, initialData }) => {
         <option value="admin">Admin</option>
       </select>
       <button type="submit" className={`${styles.button} text-[18px] !h-[42px] mt-4`}>
-        {initialData ? "Update User" : "Create User"}
+        {initialData ? "Create User" : "Update User"}
       </button>
     </form>
   );

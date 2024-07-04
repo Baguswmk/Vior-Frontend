@@ -68,25 +68,28 @@ const Header = ({ activeHeading }) => {
             </div>
           </Link>
 
-          {/* search box */}
-          <div className="relative xl:w-[500px] xl:-ml-[150px] lg:w-[500px] lg:-ml-[100px] lg:-mr-32 md:w-[400px]  md:-mr-[100px]">
+          {/* Search box */}
+          <div className="relative xl:w-[500px] xl:-ml-[150px] lg:w-[500px] lg:-ml-[100px] lg:-mr-32 md:w-[400px] md:-mr-[100px]">
             <AiOutlineSearch size={30} className="absolute right-2 top-1.5 cursor-pointer" />
-            <input type="text" placeholder="Search Product..." value={searchTerm} onChange={handleSearchChange} className="h-[40px] w-full  px-2 border-[#323334] border-[2px] rounded-md" />
-            {searchData && searchData.length !== 0 ? (
-              <div className="absolute min-h-[30vh] bg-slate-50 shadow-sm-2 z-[9] p-4">
-                {searchData &&
-                  searchData.map((i) => {
-                    return (
-                      <Link to={`/product/${i._id}`} key={i._id}>
-                        <div className="w-full flex items-start-py-3">
-                          <img loading="lazy" src={`${i.images[0].url}`} alt="" className="w-[40px] h-[40px] mr-[10px]" />
-                          <h1>{i.name}</h1>
-                        </div>
-                      </Link>
-                    );
-                  })}
+            <input type="text" placeholder="Search Product..." value={searchTerm} onChange={handleSearchChange} className="h-[40px] w-full px-2 border-[#323334] border-[2px] rounded-md" />
+            {/* Conditional rendering based on searchTerm */}
+            {searchTerm !== "" && (
+              <div className={`absolute bg-slate-50 shadow-sm z-[9] p-4 ${searchData && searchData.length !== 0 ? "min-h-[30vh] w-full max-h-[30vh] overflow-y-auto" : ""}`}>
+                {/* Conditional rendering based on searchData */}
+                {searchData && searchData.length !== 0 ? (
+                  searchData.map((product) => (
+                    <Link to={`/product/${product._id}`} key={product._id} className="block hover:bg-gray-200 p-2 rounded-md">
+                      <div className="flex items-center">
+                        <img src={product.images[0].url} alt={product.name} className="w-10 h-10 object-cover mr-2 rounded-md" />
+                        <span className="truncate">{product.name}</span>
+                      </div>
+                    </Link>
+                  ))
+                ) : (
+                  <p>Product not found!</p>
+                )}
               </div>
-            ) : null}
+            )}
           </div>
 
           {/* Icons */}

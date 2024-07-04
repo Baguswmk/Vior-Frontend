@@ -9,7 +9,6 @@ const Viewer = ({ model, ...props }) => {
   const { url } = model;
   const [isLoading, setIsLoading] = useState(true);
   const [scene, setScene] = useState(null);
-  
   useMemo(() => {
     if (url.endsWith(".glb") || url.endsWith(".gltf")) {
       const { scene } = useGLTF(url);
@@ -30,23 +29,22 @@ const Viewer = ({ model, ...props }) => {
         undefined,
         (error) => console.error("Error loading OBJ:", error)
       );
-    } else if (url.endsWith(".skp")) {
-      const skpLoader = new ColladaLoader();
-      skpLoader.load(
+    } else if (url.endsWith(".dae")) {
+      const daeLoader = new ColladaLoader();
+      daeLoader.load(
         url,
-        (skp) => {
-          setScene(skp.scene);
+        (dae) => {
+          setScene(dae.scene);
           setIsLoading(false);
         },
         undefined,
-        (error) => console.error("Error loading SKP:", error)
+        (error) => console.error("Error loading DAE:", error)
       );
     } else {
       console.warn("Unsupported model format:", url);
       setScene(null);
     }
   }, [url]);
-
   const [ref] = useBox(() => ({
     type: "Static",
     mass: 1,
@@ -54,15 +52,12 @@ const Viewer = ({ model, ...props }) => {
     position: props.position,
     ...props,
   }));
-
   if (isLoading) {
     return <Loading />;
   }
-
   if (!scene) {
     return <div>Unsupported model format</div>;
   }
-
   return (
     <group ref={ref} {...props} dispose={null}>
       <primitive object={scene} scale={props.scale} />

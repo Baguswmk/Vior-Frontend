@@ -1,8 +1,8 @@
 const Lights = () => {
   return (
     <>
-      <ambientLight intensity={3} />
-      <spotLight penumbra={0.5} position={[10, 10, 5]} castShadow />
+      <ambientLight intensity={1} />
+      <directionalLight intensity={3} position={[2, 5, -5]} castShadow />
     </>
   );
 };

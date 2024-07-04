@@ -8,6 +8,7 @@ import styles from "../../styles/styles";
 import { RxCross1 } from "react-icons/rx";
 import Modal from "../Modal/Modal";
 import UserForm from "./Form/UserForm";
+import { toast } from "react-toastify";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const Users = () => {
   const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState("");
   const [success, setSuccess] = useState(false);
-  
+
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch]);
@@ -27,19 +28,21 @@ const Users = () => {
   const handleDelete = async (id) => {
     if (userId) {
       await dispatch(deleteUser(id));
+      dispatch(getAllUsers());
     }
     setOpenDelete(false);
   };
 
   const handleFormSubmit = async (data) => {
     if (userId) {
-      await  dispatch(updateUser(userId, data));
+      await dispatch(updateUser(userId, data));
+      toast.success("User updated successfully");
       setSuccess(true);
-      if (success) {
-        window.location.reload();
-      }
+      dispatch(getAllUsers());
     } else {
       await dispatch(createUser(data));
+      toast.success("User created successfully");
+      dispatch(getAllUsers());
     }
     setOpenForm(false);
   };
@@ -152,22 +155,21 @@ const Users = () => {
           <DataGrid rows={row} columns={columns} pageSize={10} disableSelectionOnClick autoHeight />
         </div>
         {openDelete && (
-          <div className="w-full fixed top-0 left-0 z-[999] bg-[#00000039] flex items-center justify-center h-screen">
-            <div className="w-[95%] 800px:w-[40%] min-h-[20vh] bg-white rounded shadow p-5">
-              <div className="w-full flex justify-end cursor-pointer">
-                <RxCross1 size={25} onClick={() => setOpenDelete(false)} />
-              </div>
-              <h3 className="text-[25px] text-center py-5 font-Poppins text-[#000000cb]">Are you sure you wanna delete this user?</h3>
-              <div className="w-full flex items-center justify-center">
-                <div className={`${styles.button} text-[18px] !h-[42px] mr-4`} onClick={() => setOpenDelete(false)}>
-                  cancel
-                </div>
-                <div className={`${styles.button} text-[18px] !h-[42px] ml-4`} onClick={() => setOpenDelete(false) || handleDelete(userId)}>
-                  confirm
+          <Modal open={openDelete} onClose={() => setOpenDelete(false)}>
+            <div className="fixed inset-0 flex items-center justify-center z-50">
+              <div>
+                <h3 className="text-lg font-bold mb-4">Are you sure you want to delete this product?</h3>
+                <div className="flex justify-end">
+                  <button className="bg-red-500 hover:bg-red-600 text-white  py-2 px-4 rounded mr-2" onClick={() => handleDelete(userId)}>
+                    Confirm
+                  </button>
+                  <button className="bg-gray-300 hover:bg-gray-400 text-gray-800  py-2 px-4 rounded" onClick={() => setOpenDelete(false)}>
+                    Cancel
+                  </button>
                 </div>
               </div>
             </div>
-          </div>
+          </Modal>
         )}
         <Modal open={openForm} onClose={() => setOpenForm(false)} title={userId ? "Update User" : "Create User"}>
           <UserForm onSubmit={handleFormSubmit} initialData={initialData} />

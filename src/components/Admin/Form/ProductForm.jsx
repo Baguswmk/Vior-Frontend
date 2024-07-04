@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 const ProductForm = ({ onSubmit, initialData }) => {
   const [name, setName] = useState(initialData.name || "");
+  const [description, setDescription] = useState(initialData.description || "");
   const [price, setPrice] = useState(initialData.price || "");
   const [stock, setStock] = useState(initialData.stock || "");
   const [sold, setSold] = useState(initialData.sold || "");
@@ -15,20 +16,22 @@ const ProductForm = ({ onSubmit, initialData }) => {
   const [creator, setCreator] = useState(initialData.creator || "");
   const { user } = useSelector((state) => state.user);
   const userId = user._id;
-  setCreator(userId);
   useEffect(() => {
     setName(initialData.name || "");
+    setDescription(initialData.description || "");
     setPrice(initialData.price || "");
     setStock(initialData.stock || "");
     setSold(initialData.sold || "");
     setCategory(initialData.category || "Choose a category");
     setImages(initialData.images || []);
     setModels(initialData.models || []);
-  }, [initialData]);
+
+    setCreator(userId);
+  }, [initialData, userId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ name, price, stock, sold, category, images, models, creator });
+    onSubmit({ name, description, price, stock, sold, category, images, models, creator });
   };
 
   const handleImageChange = (e) => {
@@ -65,6 +68,13 @@ const ProductForm = ({ onSubmit, initialData }) => {
             Name <span className="text-red-500">*</span>
           </label>
           <TextField type="text" value={name} onChange={(e) => setName(e.target.value)} className="mt-2 w-full" placeholder="Enter your product name..." required />
+        </div>
+        <br />
+        <div>
+          <label className="pb-2">
+            Description <span className="text-red-500">*</span>
+          </label>
+          <TextField type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="mt-2 w-full" placeholder="Enter your product name..." required />
         </div>
         <br />
         <div>
