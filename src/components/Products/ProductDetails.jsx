@@ -15,6 +15,7 @@ import BaseScene from "../3DModel/Models/BaseScene";
 import BaseCharacter from "../3DModel/Models/BaseCharacter";
 import { Sky } from "@react-three/drei";
 import Loading from "../Layout/Loading";
+import ImageCarousel from "../Layout/Carousel";
 
 const ProductDetails = ({ data }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
@@ -22,7 +23,6 @@ const ProductDetails = ({ data }) => {
   const { isAuthenticated } = useSelector((state) => state.user);
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
-  const [select, setSelect] = useState(0);
   const [dataDesainer, setDataDesainer] = useState({});
   // const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -101,26 +101,6 @@ const ProductDetails = ({ data }) => {
 
   const averageRating = (totalRatings / totalReviewsLength || 0).toFixed(2);
 
-  // const handleMessageSubmit = async () => {
-  //   if (isAuthenticated) {
-  //     const groupTitle = data._id + user._id;
-  //     const userId = user._id;
-  //     const desainerId = data.creator._id;
-  //     try {
-  //       const res = await axios.post(`${server}/conversation/create-new-conversation`, {
-  //         groupTitle,
-  //         userId,
-  //         desainerId,
-  //       });
-  //       navigate(`/message?${res.data.conversation._id}`);
-  //     } catch (error) {
-  //       toast.error(error.response.data.message);
-  //     }
-  //   } else {
-  //     toast.error("Please login to create a conversation");
-  //   }
-  // };
-
   if (!data) {
     return <Loading />;
   }
@@ -132,15 +112,10 @@ const ProductDetails = ({ data }) => {
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
                 <div className="w-full flex mb-4">
-                  <div className="max-w-[100%] border px-4 flex gap-5 ">
-                    {data.images.map((i, index) => (
-                      <div key={index} className="cursor-pointer">
-                        <img src={i.url} alt="" className="h-[250px] mx-auto overflow-hidden my-3 flex items-center jusitfy-center" onClick={() => setSelect(index)} />
-                      </div>
-                    ))}
+                  <div className="max-w-[100%] px-4 flex gap-5 ">
+                    <ImageCarousel data={data} />
                   </div>
                 </div>
-                <img loading="lazy" src={data.images[select].url} alt="" className="w-[80%]" />
               </div>
               <div className="w-full 800px:w-[50%] pt-5">
                 <h1 className={styles.productTitle}>{data.name}</h1>
@@ -167,11 +142,11 @@ const ProductDetails = ({ data }) => {
                   </div>
                 </div>
                 {data.models3d && data.models3d.length > 0 && data.models3d[0].url && isAuthenticated && (
-                  <div className={`${styles.button} max-w-52 mt-6 rounded-[4px] h-11 flex items-center`} onClick={openModal}>
+                  <div className={`${styles.button} max-w-52 mt-6 rounded-[4px] h-11 flex items-center cursor-pointer`} onClick={openModal}>
                     <span className="flex items-center">View 3D Model</span>
                   </div>
                 )}
-                <div className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`} onClick={() => addToCartHandler(data._id)}>
+                <div className={`${styles.button} !mt-6 !rounded !h-11 flex items-center cursor-pointer`} onClick={() => addToCartHandler(data._id)}>
                   <span className="flex items-center">
                     Add to cart <AiOutlineShoppingCart className="ml-1" />
                   </span>
@@ -206,10 +181,10 @@ const ProductDetails = ({ data }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50" onClick={closeModal}></div>
           <div className="relative bg-white w-11/12 h-screen rounded-lg overflow-hidden ">
             <BaseScene>
-              <Viewer model={{ url: "https://vior-backend.vercel.app" + data.models3d[0].url }} args={[0.5, 1, 0.5]} scale={1} position={[2, 0.2, 0]} />
+              {/* <Viewer model={{ url: "https://vior-backend.vercel.app" + data.models3d[0].url }} args={[0.5, 1, 0.5]} scale={1} position={[2, 0.2, 0]} /> */}
               {/* <Viewer model={{ url: "https://api-vior.vior-e-commerce.my.id" + data.models3d[0].url }} args={[0.5, 1, 0.5]} scale={1} position={[2, 0.29, 0]} /> */}
-              {/* <Viewer model={{ url: "http://localhost:8000" + data.models3d[0].url }} args={[0.5, 1, 0.5]} scale={1} position={[2, 0.29, 0]} /> */}
-              <BaseCharacter controls position={[2, 1, 3]} args={[0.8]} color="yellow" />
+              <Viewer model={{ url: "http://localhost:8000" + data.models3d[0].url }} args={[0.5, 1, 0.5]} scale={1} position={[2, 0.29, 0]} />
+              <BaseCharacter controls position={[0, 1, 0]} args={[0.8]} color="yellow" />
               <Sky />
             </BaseScene>
             <button onClick={closeModal} className="z-[10000] absolute top-0 right-0 m-2 text-red-600 p-2 rounded-full bg-white">

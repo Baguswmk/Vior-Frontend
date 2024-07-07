@@ -8,8 +8,8 @@ import Floor from "./Floor";
 const BasicScene = ({ children }) => {
   return (
     <div className="w-full h-screen">
-      <div id="joystick" className="flex md:hidden absolute bottom-[25%] left-[15%] w-16 h-16"></div>
-
+      <div id="joystick" className="flex md:hidden absolute bottom-[25%] left-[10%] w-16 h-16"></div>
+      <div id="touchscreen" className="absolute md:hidden z-[100] opacity-30 top-0 right-0 w-3/4 h-full"></div>
       <Canvas shadows camera={{ fov: 50 }}>
         <Physics gravity={[0, -9.8, 0]}>
           <Lights />
@@ -26,4 +26,3 @@ const BasicScene = ({ children }) => {
 };
 
 export default BasicScene;
-  

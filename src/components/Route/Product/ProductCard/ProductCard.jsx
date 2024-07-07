@@ -60,9 +60,8 @@ const ProductCard = ({ data, isEvent }) => {
       <Link to={`${isEvent ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`}`}>
         <img loading="lazy" src={`${data.images && data.images[0]?.url}`} alt="" className="w-full h-[170px] object-contain" />
       </Link>
-      <Link to={`/desainer/preview/${data._id}`}>
-        <h5 className={`${styles.shop_name}`}>{data.creator.name}</h5>
-      </Link>
+
+      <h5 className={`${styles.shop_name}`}>{data.creator.name}</h5>
       <Link to={`${isEvent ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`}`}>
         <h4 className="pb-3 font-[500]">{data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}</h4>
         <div className="flex">
