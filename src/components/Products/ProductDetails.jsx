@@ -177,7 +177,7 @@ const ProductDetails = ({ data }) => {
         </div>
       ) : null}
       {modalIsOpen && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-[100000]">
           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50" onClick={closeModal}></div>
           <div className="relative bg-white w-11/12 h-screen rounded-lg overflow-hidden ">
             <BaseScene>
