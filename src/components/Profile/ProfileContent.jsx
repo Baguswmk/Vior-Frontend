@@ -275,10 +275,8 @@ const AllItems = () => {
       flex: 1,
       minWidth: 200,
       renderCell: (params) => (
-        <Button>
-          <a href={params && params.value} target="_blank" rel="noreferrer">
-            <AiOutlineDownload />
-          </a>
+        <Button onClick={() => handleDownloadClick(params.value)}>
+          <AiOutlineDownload />
         </Button>
       ),
     },

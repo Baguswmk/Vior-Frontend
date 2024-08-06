@@ -81,8 +81,8 @@ const Checkout = () => {
           <CartData totalPrice={totalPrice} tax={tax} subTotalPrice={subTotalPrice} />
         </div>
       </div>
-      <div className={`${styles.button} w-[150px] 800px:w-[280px] mt-10`} onClick={paymentSubmit}>
-        <h5 className="text-white">Go to Payment</h5>
+      <div className={`${styles.button} w-[150px] 800px:w-[280px] mt-10 text-white cursor-pointer hover:text-black`} onClick={paymentSubmit}>
+        <h5>Go to Payment</h5>
       </div>
     </div>
   );
